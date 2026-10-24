@@ -1,111 +1,50 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
-  margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+:root { font-family:Inter,'Segoe UI',Arial,sans-serif; color:#233446; background:#edf2f6; font-synthesis:none; text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased; color-scheme:light; }
+* { box-sizing:border-box; }
+body { margin:0; }
+#root { max-width:1280px; margin:0 auto; min-height:100svh; }
+button,input,select,textarea { font-family:inherit; }
+button,a,input,select,textarea,summary { -webkit-tap-highlight-color:transparent; }
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible { outline:3px solid #c88e17; outline-offset:3px; }
+button { cursor:pointer; }
+a { color:#25657a; text-underline-offset:3px; }
+.app-header { background:#132d3c; padding:25px 30px; color:#fff; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:22px; }
+.app-brand { display:flex; gap:15px; align-items:center; min-width:0; }
+.app-brand-icon { display:flex; align-items:center; justify-content:center; color:#f6c96a; background:#264250; width:48px; height:48px; border-radius:14px; flex-shrink:0; }
+.app-brand small { color:#f6c96a; font-size:11px; font-weight:750; letter-spacing:1.8px; }
+.app-brand h1 { font-size:24px; margin:4px 0 6px; letter-spacing:-.5px; line-height:1.1; }
+.app-brand p { font-size:12px; color:#b9ccd6; margin:0; overflow-wrap:anywhere; }
+.app-toolbar { display:flex; flex-wrap:wrap; gap:9px; }
+.app-toolbar button { border:1px solid #6e8793; border-radius:8px; padding:10px 12px; background:transparent; color:#fff; font-size:12px; display:flex; align-items:center; justify-content:center; gap:7px; font-weight:600; }
+.app-toolbar button:last-child { background:#f4bf55; border-color:#f4bf55; color:#253744; }
+.app-toolbar button:hover { border-color:#f4bf55; }
+.app-toolbar button:disabled { opacity:.45; cursor:default; }
+.app-nav { display:flex; flex-wrap:wrap; padding:17px 25px 0; gap:5px; background:#edf2f6; }
+.app-tab { border:1px solid transparent; border-radius:10px 10px 0 0; padding:12px 14px; background:transparent; color:#5b6e7c; font-size:12px; font-weight:600; display:flex; align-items:center; gap:8px; }
+.app-tab span { display:flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:6px; background:#dce5eb; font-size:11px; }
+.app-tab.active { background:#fff; border-color:#dce5eb; border-bottom-color:#fff; color:#173d4e; font-weight:750; }
+.app-tab.active span { background:#f8cd74; color:#614813; }
+.app-status { padding:9px 30px; color:#5a6f7e; font-size:11px; border-bottom:1px solid #e1e8ed; background:#fff; }
+.app-main { padding:25px 30px 40px; }
+.app-panel { min-width:0; }
+.app-details { background:#fff; border:1px solid #e1e7ed; padding:14px 16px; border-radius:10px; margin-bottom:16px; font-size:12px; }
+.app-details > summary { cursor:pointer; color:#4a6475; font-weight:600; }
+.app-details[open] > summary { margin-bottom:15px; }
+.app-step-footer { display:flex; justify-content:flex-end; margin-top:20px; }
+.app-schedules { display:flex; flex-wrap:wrap; gap:7px; margin:14px 0; }
+.app-schedules button { font-size:11px; padding:8px 9px; border:1px solid #cad7e0; border-radius:7px; background:#fff; color:#365168; }
+.app-schedules button[aria-pressed=true] { background:#fff0ce; border-color:#d4ab51; color:#73551a; }
+.app-step-footer button { padding:12px 18px; border:0; border-radius:9px; color:#fff; background:#183d4b; display:flex; align-items:center; gap:8px; font-weight:600; font-size:13px; }
+.app-footer { border-top:1px solid #dce4eb; color:#637786; padding:20px 30px; display:flex; gap:18px; justify-content:space-between; flex-wrap:wrap; font-size:11px; }
+@media(max-width:700px) {
+  .app-header { padding:20px 16px; }
+  .app-brand h1 { font-size:22px; }
+  .app-toolbar { width:100%; }
+  .app-toolbar button { flex:1; padding:10px 8px; }
+  .app-nav { padding:12px 12px 0; gap:4px; }
+  .app-tab { padding:9px 8px; font-size:11px; }
+  .app-tab span { width:18px; height:18px; }
+  .app-main { padding:20px 12px; }
+  .app-status { padding:9px 16px; }
+  .app-grid { grid-template-columns:1fr!important; }
+  .app-footer { padding:20px 16px; }
 }

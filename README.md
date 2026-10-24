@@ -1,98 +1,76 @@
-# Reto 02 — Dimensionamiento del Generador Fotovoltaico
+# Reto 03 ESFV · Inversor y banco de baterías
 
-Aplicación web desarrollada para el **Reto 02 de Energía Solar Fotovoltaica (ESFV)** de Ingeniería Electrónica — Universidad del Magdalena.
+Aplicación web para elegir el equipo de conversión y dimensionar el almacenamiento de un sistema solar fotovoltaico. Proyecto de Energía Solar Fotovoltaica, Universidad del Magdalena, periodo 2026-II.
 
-La aplicación constituye la segunda etapa del Reto 01 y permite utilizar automáticamente los resultados del dimensionamiento de cargas para realizar el dimensionamiento del generador fotovoltaico.
+**Versión 3.1.0.** La entrega se centra en Reto 03. El registro de aparatos y el cálculo de paneles de los Retos 01 y 02 se mantienen integrados como datos de partida.
 
----
+## Probar la aplicación
 
-## 1. Descripción
+Requisitos: Node.js 24 y pnpm 11.25.0.
 
-El sistema integra los resultados obtenidos en el Reto 01 con la información del recurso solar y un catálogo de módulos fotovoltaicos comerciales.
+```sh
+git clone https://github.com/Nico2919/reto02-esfv.git
+cd reto02-esfv
+pnpm install --frozen-lockfile
+pnpm dev
+```
 
-A partir de la energía diaria requerida, el recurso solar disponible, el factor global de desempeño y las restricciones eléctricas declaradas, la aplicación calcula:
+Abre la dirección que muestra Vite, normalmente **http://localhost:5173**. Para explorar el caso académico, pulsa **Probar con un ejemplo**. Para empezar tu propio diseño, pulsa **Agregar mis aparatos** o **Abrir proyecto**.
 
-- Potencia pico requerida del generador.
-- Número entero de módulos.
-- Potencia instalada.
-- Excedente o déficit de potencia.
-- Número de módulos en serie.
-- Número de cadenas en paralelo.
-- Tensión de circuito abierto corregida a temperatura mínima.
-- Tensión de operación del generador.
-- Corriente de cortocircuito.
-- Corriente de diseño.
-- Temperatura estimada de célula mediante modelo NOCT.
-- Área requerida por el generador.
-- Energía diaria estimada del generador.
+## Qué permite hacer
 
-La aplicación también permite comparar diferentes módulos comerciales y seleccionar automáticamente una alternativa viable.
+- Trabajar con baterías (sistemas aislados o híbridos) o sin baterías (conectados a red).
+- Comparar inversores y reguladores, comprobar voltajes/corrientes y reorganizar los paneles cuando sea posible.
+- Calcular cantidad de baterías, capacidad, autonomía y límites de carga/descarga.
+- Revisar la energía disponible durante el año y en el mes con menos sol; añadir paneles y deshacer la ampliación.
+- Guardar/abrir el proyecto completo y descargar un informe ejecutivo PDF de una página.
 
----
+La pantalla principal usa lenguaje sencillo. Las fórmulas, siglas, comprobaciones completas y catálogos editables están en secciones desplegables y en la guía técnica. Las alertas relevantes siguen visibles. «Requiere revisión» indica que faltan datos de ficha; no equivale a compatibilidad confirmada.
 
-## 2. Funcionalidades principales
+## Documentos para la entrega
 
-### Reto 01
+| Documento | Contenido |
+|---|---|
+| [Guía de uso](docs/GUIA_USO.md) | Recorrido para una persona que abre la aplicación por primera vez |
+| [Entrega del Reto 03](docs/ENTREGA_RETO03.md) | Alcance, demostración y archivos del proyecto |
+| [Validación RF-25 a RF-36](docs/VALIDACION_RETO03.md) | Matriz de requisitos y resultados numéricos esperados |
+| [Método de cálculo](docs/METODO_CALCULO.md) | Ecuaciones, unidades, supuestos y datos pendientes |
+| [Historial de actualizaciones](CHANGELOG.md) | Cambios por versión |
 
-La aplicación conserva las funcionalidades relacionadas con el cuadro de cargas y permite obtener:
+## Verificar una actualización
 
-- Energía diaria.
-- Perfil horario de 24 horas.
-- Demanda máxima.
-- Hora de máxima demanda.
-- Energía dentro y fuera de la ventana solar.
-- Información general del proyecto.
+```sh
+pnpm test
+pnpm lint
+pnpm build
+pnpm exec playwright install chromium
+pnpm test:ui
+```
 
-Los resultados necesarios para el Reto 02 son heredados automáticamente, evitando que el usuario tenga que volver a introducir la información de las cargas.
+Las pruebas de interfaz usan la compilación de `dist/` y abren su propio servidor en el puerto 4173. En Windows con Edge instalado:
 
-### Reto 02
+```powershell
+$env:PLAYWRIGHT_CHANNEL = 'msedge'
+pnpm test:ui
+```
 
-El módulo de dimensionamiento permite:
+GitHub Actions ejecuta las pruebas, lint y build al actualizar `main`, las ramas `feat/` y las solicitudes de integración. Su resultado se consulta en **Actions**. Las capturas y PDF de pruebas quedan en `tmp/qa/` localmente; no forman parte del código fuente.
 
-- Seleccionar el recurso solar mediante una base de datos local.
-- Consultar NASA POWER.
-- Trabajar con los datos solares en el plano del generador.
-- Utilizar el promedio anual o el mes crítico.
-- Configurar el PR.
-- Configurar la tensión máxima del sistema.
-- Configurar la temperatura mínima.
-- Configurar la temperatura de operación.
-- Declarar el área disponible.
-- Seleccionar automáticamente un módulo comercial.
-- Forzar manualmente un módulo del catálogo.
-- Verificar la viabilidad eléctrica de las cadenas.
-- Generar informes en PDF y HTML.
+La validación local de esta versión incluye 16 pruebas numéricas/de regresión y 7 recorridos de interfaz.
 
----
+## Organización
 
-## 3. Tecnologías utilizadas
+```text
+src/reto03/          Interfaz, cálculo, mensajes, persistencia e informe del Reto 03
+src/reto02/          Motor de paneles del Reto 02, conservado
+src/App.jsx         Integración con aparatos y consumo del Reto 01
+public/             Catálogos JSON, caso de ejemplo y guía técnica
+docs/               Documentación de uso, entrega, método y validación
+tests/              Pruebas numéricas y de regresión
+tests-ui/           Recorridos reales en navegador
+.github/workflows/  Validación automática de actualizaciones
+```
 
-- React
-- Vite
-- JavaScript / JSX
-- Recharts
-- XLSX
-- jsPDF
-- jsPDF-AutoTable
-- Lucide React
+Los catálogos comerciales incluyen fichas y revisiones de Victron, Deye y Solis. CTRL-A/B/C, INV-A/B/C y las baterías AGM/LFP del caso de prueba son **referencias académicas**, separadas de productos comerciales. Los catálogos pueden editarse desde la aplicación. El proyecto JSON v3 conserva las entradas y catálogos; también se pueden abrir archivos de los Retos 01/02.
 
----
-
-## 4. Requisitos
-
-Para ejecutar el proyecto se requiere:
-
-- Node.js
-- npm
-- Navegador web moderno
-
-El proyecto fue desarrollado y probado mediante Vite.
-
----
-
-## 5. Instalación
-
-Clonar o descargar el repositorio y entrar en la carpeta del proyecto:
-
-```bash
-cd Reto02_ESFV
+Se conserva la dirección `Nico2919/reto02-esfv` para mantener la continuidad del repositorio. El nombre de la aplicación, documentación e historial identifican la entrega actual como **Reto 03**. Desarrollo asistido por IA (Codex), documentado para revisión y sustentación.

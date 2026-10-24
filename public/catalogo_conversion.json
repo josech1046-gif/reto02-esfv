@@ -1,0 +1,52 @@
+[
+  {
+    "id": "victron15070", "origen": "comercial", "rama": "con", "tipo": "regulador",
+    "fabricante": "Victron Energy", "modelo": "SmartSolar MPPT 150/70-Tr VE.Can",
+    "vMax": 150, "mpptMin": null, "mpptMax": 145, "startOffset": 5,
+    "impMax": null, "iscMax": 50, "outMax": 70, "mppts": 1,
+    "clasesBanco": [12, 24, 36, 48],
+    "fuente": "https://www.victronenergy.com/media/pg/Manual_SmartSolar_MPPT_150-70_up_to_250-100_VE.Can/es/technical-specifications.html",
+    "fechaConsulta": "2026-10-23", "nota": "Version Tr. 150 V absoluto, 145 V en operacion. La tension de 48 V es clase nominal; admite perfil LFP con configuracion de carga apropiada. El rango de banco aqui expresa clases nominales."
+  },
+  {
+    "id": "victron25070", "origen": "comercial", "rama": "con", "tipo": "regulador",
+    "fabricante": "Victron Energy", "modelo": "SmartSolar MPPT 250/70-Tr VE.Can",
+    "vMax": 250, "mpptMin": null, "mpptMax": 245, "startOffset": 5,
+    "impMax": null, "iscMax": 35, "outMax": 70, "mppts": 1, "clasesBanco": [12, 24, 36, 48],
+    "fuente": "https://www.victronenergy.com/media/pg/Manual_SmartSolar_MPPT_150-70_up_to_250-100_VE.Can/es/technical-specifications.html",
+    "fechaConsulta": "2026-10-23", "nota": "Version Tr, clases de bateria 12/24/36/48 V; verificar perfil de carga/BMS para LFP 51,2 V. 250 V absoluto y 245 V operacion. Imp no declarado por separado."
+  },
+  {
+    "id": "victron250100", "origen": "comercial", "rama": "con", "tipo": "regulador",
+    "fabricante": "Victron Energy", "modelo": "SmartSolar MPPT 250/100-Tr VE.Can",
+    "vMax": 250, "mpptMin": null, "mpptMax": 245, "startOffset": 5,
+    "impMax": null, "iscMax": 70, "outMax": 100, "mppts": 1, "clasesBanco": [12, 24, 36, 48],
+    "fuente": "https://www.victronenergy.com/media/pg/Manual_SmartSolar_MPPT_150-70_up_to_250-100_VE.Can/es/technical-specifications.html",
+    "fechaConsulta": "2026-10-23", "nota": "Version Tr, clases de bateria 12/24/36/48 V; verificar perfil de carga/BMS. Imp no declarado por separado."
+  },
+  {
+    "id": "deye5k", "origen": "comercial", "rama": "con", "tipo": "hibrido",
+    "fabricante": "Deye", "modelo": "SUN-5K-SG03LP1-EU (ficha 240722)",
+    "vMax": 500, "mpptMin": 150, "mpptMax": 425, "startV": 125,
+    "impMax": 13, "iscMax": 17, "outMax": 120, "mppts": 2, "stringsMax": 1,
+    "pac": 5000, "pvMax": 6500, "batMin": 40, "batMax": 60,
+    "fuente": "https://www.deyeinverter.com/deyeinverter/2024/07/23/datasheet_sun-3.6-6k-sg03lp1_240722_en.pdf",
+    "fechaConsulta": "2026-10-23", "nota": "Version EU monofasica 220/230 V, 50/60 Hz. No sustituir por variantes LP1-US/LP1-EU de otra revision."
+  },
+  {
+    "id": "solis2k", "origen": "comercial", "rama": "sin", "tipo": "inversor",
+    "fabricante": "Solis (Ginlong)", "modelo": "S6-GR1P2K-M (manual EUR V1.0)",
+    "vMax": 600, "mpptMin": 80, "mpptMax": 500, "startV": 90,
+    "impMax": 14, "iscMax": 22, "mppts": 1, "stringsMax": 1, "pac": 2000,
+    "fuente": "https://www.ginlong.com/uploads/file/Solis_Manual_S6-GR1P%280%2C7-3%2C6%29K-M_EUR_V1%2C0.pdf",
+    "fechaConsulta": "2026-10-23", "nota": "Version 220/230 V 50/60 Hz, manual citado. No mezclar con revision 16 A o variante LV."
+  },
+  {
+    "id": "solis3k", "origen": "comercial", "rama": "sin", "tipo": "inversor",
+    "fabricante": "Solis (Ginlong)", "modelo": "S6-GR1P3K (manual EUR V1.2)",
+    "vMax": 600, "mpptMin": 90, "mpptMax": 520, "startV": 120,
+    "impMax": 14, "iscMax": 22, "mppts": 2, "stringsMax": 1, "pac": 3000,
+    "fuente": "https://www.ginlong.com/uploads/file/Solis_Manual_S6-GR1P%282%2C5-6%29K_FN_EUR_V1%2C2%2820221116%29.pdf",
+    "fechaConsulta": "2026-10-23", "nota": "Version 220/230 V, 50/60 Hz. Compatibilidad de red local debe verificarse por separado."
+  }
+]

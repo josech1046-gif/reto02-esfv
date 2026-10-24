@@ -1,20 +1,23 @@
-import React, { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef, useEffect, useId, Children, cloneElement, isValidElement } from "react";
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, ReferenceDot, BarChart, Bar,
 } from "recharts";
 import * as XLSX from "xlsx";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
+import Reto03Tab from './reto03/Reto03Tab.jsx';
+import { inicialReto03, heredarReto03, calcularReto03, validarCatalogos } from './reto03/calculos.js';
+import { crearProyecto, leerProyecto } from './reto03/proyecto.js';
+import { construirInforme } from './reto03/informe.js';
+import { calcularGenerador, evaluarCatalogo } from './reto02/generador.js';
 import {
   Sun, Moon, Sunrise, Plus, Pencil, Trash2, Eraser, Upload, Save,
-  FolderOpen, RotateCcw, FileDown, CheckCircle2, AlertTriangle, X,
-  Gauge, Zap, BatteryCharging, CalendarDays, Coins, Clock, ListChecks,
-  MapPin, Wifi, WifiOff, Database, Grid3x3, Ruler, Settings2, PanelsTopLeft,
+  FolderOpen, FileDown, CheckCircle2, AlertTriangle, X,
+  Gauge, Zap, BatteryCharging, CalendarDays, Coins, Clock, ListChecks, ArrowRight,
+  MapPin, Wifi, WifiOff, Database, Grid3x3, Settings2, PanelsTopLeft,
 } from "lucide-react";
 
 /* ============================================================
-   RETO 01 + RETO 02 · ESFV — VERSION WEB (FINAL)
+   RETO 03 · ESFV — APLICACION INTEGRADA
    ============================================================ */
 
 function interpretarHorario(texto) {
@@ -128,35 +131,49 @@ function claseColor(clasificacion) {
   }
 }
 
-function cargaInicial(item, carga, cantidad, potencia, horarioTexto) {
-  const { mask } = interpretarHorario(horarioTexto);
-  return { id: item, item, carga, cantidad, potenciaUnitaria: potencia, mask, horarioTexto };
-}
-
-const CARGAS_DEMO = [
-  cargaInicial(1, "Aire acondicionado", 3, 1200, "19-07;12-17"),
-  cargaInicial(2, "Nevera", 1, 800, "01-12;13-24"),
-  cargaInicial(3, "Television", 2, 150, "08-12;15-21"),
-];
-
 /* ============================================================
    COMPONENTE PRINCIPAL
    ============================================================ */
 
-export default function Reto01Web() {
-  const [tab, setTab] = useState("proyecto");
+export default function ESFVApp() {
+  const [tab, setTab] = useState("reto03");
+  const [reto03, setReto03] = useState(inicialReto03);
+  const [catalogosReto03, setCatalogosReto03] = useState({ conversion: [], baterias: [] });
+  const [errorCatalogoReto03, setErrorCatalogoReto03] = useState('Cargando catalogos externos...');
+  const proyectoRestaurado = useRef(false);
+  const catalogosRestaurados = useRef(false);
+
+  function actualizarCatalogosReto03(datos) {
+    validarCatalogos(datos);
+    catalogosRestaurados.current = true;
+    setCatalogosReto03(datos);
+    setErrorCatalogoReto03('');
+  }
+
+  useEffect(() => {
+    let activo = true;
+    Promise.all(['catalogo_conversion.json', 'catalogo_conversion_tdr.json', 'catalogo_baterias.json'].map(async nombre => {
+      const resp = await fetch(`./${nombre}`);
+      if (!resp.ok) throw new Error(`${nombre}: HTTP ${resp.status}`);
+      return resp.json();
+    })).then(([comercial, tdr, baterias]) => {
+      const datos = validarCatalogos({ conversion: [...comercial, ...tdr], baterias });
+      if (activo && !catalogosRestaurados.current) actualizarCatalogosReto03(datos);
+    }).catch(e => { if (activo && !catalogosRestaurados.current) setErrorCatalogoReto03(`No se pudieron cargar catalogos: ${e.message}. Importe JSON desde la pestaña 5.`); });
+    return () => { activo = false; };
+  }, []);
 
   const [proyecto, setProyecto] = useState({
-    nombre: "Linea base ESFV",
+    nombre: "Mi proyecto solar",
     fecha: new Date().toISOString().slice(0, 10),
-    integrantes: "Integrante 1\nIntegrante 2\nIntegrante 3",
+    integrantes: "",
     tipoApp: "Off-grid",
     diasMes: 30,
     cu: 1000,
   });
 
   const [criterio, setCriterio] = useState({ inicio: 6, fin: 18 });
-  const [cargas, setCargas] = useState(CARGAS_DEMO);
+  const [cargas, setCargas] = useState([]);
   const [seleccionId, setSeleccionId] = useState(null);
 
   const [form, setForm] = useState({
@@ -164,10 +181,10 @@ export default function Reto01Web() {
   });
   const [formError, setFormError] = useState(null);
 
-  const [status, setStatus] = useState("Listo para iniciar.");
+  const [status, setStatus] = useState("Empieza con tus aparatos, abre un proyecto o prueba el ejemplo.");
   const [modal, setModal] = useState(null);
   const [factoresInfo, setFactoresInfo] = useState(
-    "Factores del Excel: sin cargar. En este avance son informativos y no alteran los calculos."
+    ""
   );
 
   const fileExcelRef = useRef(null);
@@ -382,7 +399,7 @@ export default function Reto01Web() {
                 if (nomP.includes("electro") && Number.isFinite(valP)) factorElectro = valP;
                 else if (nomP.includes("fuerza") && Number.isFinite(valP)) factorFuerza = valP;
               }
-            } catch (_) { }
+            } catch { /* Optional source: retain local fallback. */ }
           }
         } else if (idxOriginal) {
           hojaUsada = idxOriginal;
@@ -411,7 +428,7 @@ export default function Reto01Web() {
             factorFuerza = Number(factores?.[1]?.[1]);
             if (!Number.isFinite(factorElectro)) factorElectro = null;
             if (!Number.isFinite(factorFuerza)) factorFuerza = null;
-          } catch (_) { }
+          } catch { /* Optional source: retain local fallback. */ }
         } else {
           throw new Error("Formato de Excel no reconocido. Se esperaba una hoja 'LINEA_BASE_MATLAB' o 'LINEA BASE'.");
         }
@@ -438,14 +455,7 @@ export default function Reto01Web() {
   }
 
   function onGuardarProyecto() {
-    const datos = {
-      _tipo: "Reto01-ProyectoESFV", version: 2,
-      proyecto, criterio,
-      cargas: cargas.map(({ id, item, carga, cantidad, potenciaUnitaria, mask }) => (
-        { id, item, carga, cantidad, potenciaUnitaria, mask }
-      )),
-      generador: generadorState,
-    };
+    const datos = crearProyecto({ proyecto, criterio, cargas, generador: generadorState, baseSolar, reto03, catalogosReto03 });
     const blob = new Blob([JSON.stringify(datos, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -458,6 +468,29 @@ export default function Reto01Web() {
 
   function onCargarProyectoClick() { fileProyectoRef.current?.click(); }
 
+  function restaurarProyecto(entrada, nombre) {
+    const datos = leerProyecto(entrada);
+    proyectoRestaurado.current = true;
+    setProyecto(datos.proyecto);
+    setCriterio(datos.criterio);
+    setCargas(datos.cargas);
+    setGeneradorState({ ...generadorInicial(), ...datos.generador });
+    setBaseSolar(datos.baseSolar || BASE_DATOS_SOLAR);
+    setReto03(datos.reto03);
+    if (datos.catalogosReto03) actualizarCatalogosReto03(datos.catalogosReto03);
+    limpiarFormulario();
+    setStatus(`Proyecto abierto: ${nombre}.`);
+  }
+
+  async function onCargarEjemplo() {
+    try {
+      const respuesta = await fetch('./ejemplo_reto03.json');
+      if (!respuesta.ok) throw new Error('El ejemplo no esta disponible.');
+      restaurarProyecto(await respuesta.json(), 'Estacion de monitoreo - Alta Guajira');
+      setTab('reto03');
+    } catch (err) { mostrarAlerta('No se pudo abrir el ejemplo', err.message); }
+  }
+
   function onCargarProyecto(e) {
     const file = e.target.files?.[0];
     e.target.value = "";
@@ -465,16 +498,7 @@ export default function Reto01Web() {
     const reader = new FileReader();
     reader.onload = (ev) => {
       try {
-        const datos = JSON.parse(ev.target.result);
-        if (!datos || datos._tipo !== "Reto01-ProyectoESFV") {
-          throw new Error("El archivo no corresponde a un proyecto valido del Reto 01/02.");
-        }
-        setProyecto(datos.proyecto);
-        setCriterio(datos.criterio || { inicio: 6, fin: 18 });
-        setCargas(datos.cargas || []);
-        if (datos.generador) setGeneradorState((g) => ({ ...g, ...datos.generador }));
-        limpiarFormulario();
-        setStatus(`Proyecto cargado: ${file.name} (RF-13: datos heredados sin reingreso).`);
+        restaurarProyecto(JSON.parse(ev.target.result), file.name);
       } catch (err) {
         mostrarAlerta("Error al cargar el archivo", err.message);
       }
@@ -486,7 +510,7 @@ export default function Reto01Web() {
      RETO 02 · GENERADOR FOTOVOLTAICO (RF-13 a RF-24)
      ================================================================ */
 
-  const [generadorState, setGeneradorState] = useState({
+  const generadorInicial = () => ({
     modoRecurso: "local",            
     sitioId: "nazareth",
     lat: 12.18, lon: -71.28,
@@ -505,6 +529,7 @@ export default function Reto01Web() {
     moduloForzado: false,
     catalogo: CATALOGO_INICIAL(),
   });
+  const [generadorState, setGeneradorState] = useState(generadorInicial);
 
   function setGen(patch) {
     setGeneradorState((g) => (typeof patch === "function" ? patch(g) : { ...g, ...patch }));
@@ -525,22 +550,22 @@ export default function Reto01Web() {
         const r = await fetch("./catalogo_modulos.json");
         if (r.ok) {
           const json = await r.json();
-          if (Array.isArray(json) && json.length > 0 && activo) {
+          if (Array.isArray(json) && json.length > 0 && activo && !proyectoRestaurado.current) {
             setGen({ catalogo: json });
             mensajes.push(`catalogo_modulos.json (${json.length} referencias)`);
           }
         }
-      } catch (_) { }
+      } catch { /* Optional source: retain local fallback. */ }
       try {
         const r = await fetch("./base_datos_solar.json");
         if (r.ok) {
           const json = await r.json();
-          if (Array.isArray(json) && json.length > 0 && activo) {
+          if (Array.isArray(json) && json.length > 0 && activo && !proyectoRestaurado.current) {
             setBaseSolar(json);
             mensajes.push(`base_datos_solar.json (${json.length} sitios)`);
           }
         }
-      } catch (_) { }
+      } catch { /* Optional source: retain local fallback. */ }
       if (activo && mensajes.length > 0) {
         setFuenteDatosInfo(`Cargado desde archivo externo: ${mensajes.join(" y ")}.`);
       } else if (activo) {
@@ -661,7 +686,7 @@ export default function Reto01Web() {
     } catch (err) {
       setGen({
         apiStatus: "error_fallback", rawDataApi: null,
-        apiMensaje: `Fallo API (${err.message}). Se usa contingencia local (RF-15).`,
+        apiMensaje: `No se pudieron consultar los datos de NASA (${err.message}). Se usan los datos guardados.`,
       });
       setStatus("API no disponible: contingencia local.");
     }
@@ -694,6 +719,9 @@ export default function Reto01Web() {
   const moduloActivo = generadorState.catalogo.find(
       (m) => m.id === (generadorState.moduloForzado ? generadorState.moduloSeleccionadoId : dimension.mejorOpcion?.id)
   ) || generadorState.catalogo[0];
+
+  const heredadosReto03 = heredarReto03({ resultados, proyecto, dimension, modulo: moduloActivo, gen: generadorState, hspAnual, hspCritico, sitio });
+  const resultadoReto03 = calcularReto03(heredadosReto03, reto03, catalogosReto03);
 
   /* ---------------------- Informe ejecutivo (RF-11 / RF-24) ---------------------- */
 
@@ -753,7 +781,7 @@ export default function Reto01Web() {
         svg{background:#F9FAFB;border:1px solid #E1E4E9;border-radius:6px;}
         @media print{body{margin:0;padding:12px;}}
       </style></head><body>
-      <h1>RETO 01-02 · Informe ejecutivo del requerimiento energetico y generador FV</h1>
+      <h1>RETO 03 ESFV · Informe del sistema solar</h1>
       <div class="sub">Proyecto: <b>${escapeHtml(proyecto.nombre)}</b> &nbsp;|&nbsp;
         Fecha: ${escapeHtml(proyecto.fecha)} &nbsp;|&nbsp;
         Tipo de aplicacion: ${escapeHtml(proyecto.tipoApp)} &nbsp;|&nbsp;
@@ -777,6 +805,10 @@ export default function Reto01Web() {
       </svg>
 
       ${seccionGenerador}
+      <div class="section-title">Conversion y banco (Reto 03)</div>
+      <div class="sub">Rama: ${resultadoReto03.rama === 'con' ? 'con almacenamiento' : 'sin almacenamiento'}.
+      ${escapeHtml(resultadoReto03.errores.length ? resultadoReto03.errores.join('; ') :
+        `Equipo: ${resultadoReto03.seleccionado?.equipo.modelo ?? 'sin seleccionar'}; ${resultadoReto03.seleccionado?.estado ?? 'pendiente'}. Arreglo efectivo: ${resultadoReto03.arreglo.ns}S x ${resultadoReto03.arreglo.np}P. Banco: ${resultadoReto03.banco ? (resultadoReto03.banco.wh / 1000).toFixed(2) + ' kWh' : 'no aplica'}. Margen anual/critico: ${resultadoReto03.balance.anual.margenPct.toFixed(2)}% / ${resultadoReto03.balance.critico.margenPct.toFixed(2)}%. Alertas: ${resultadoReto03.avisos.join('; ')}`)}</div>
 
       <div class="section-title">Cuadro de cargas (${cargasCalc.length})</div>
       <table><thead><tr><th>Item</th><th>Carga</th><th>Cant.</th><th>P. unit [W]</th>
@@ -784,7 +816,7 @@ export default function Reto01Web() {
         <tbody>${filasCargas}</tbody></table>
 
       <p style="font-size:10px;color:#8A93A0;margin-top:18px;">
-        Generado automaticamente por la aplicacion web Reto 01-02 - ESFV.
+        Generado por Reto 03 ESFV.
         Dias de operacion/mes: ${proyecto.diasMes} · CU: $${proyecto.cu}/kWh.
       </p>
       </body></html>`;
@@ -799,97 +831,9 @@ export default function Reto01Web() {
   }
 
   function onGenerarInformePDF() {
-    const doc = new jsPDF({ unit: "mm", format: "a4" });
-    const pageW = doc.internal.pageSize.getWidth();
-    const marginX = 12;
-    let y = 14;
-
-    doc.setFillColor(11, 18, 32);
-    doc.rect(0, 0, pageW, 20, "F");
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(13); doc.setFont(undefined, "bold");
-    doc.text("RETO 01-02 · Informe ejecutivo del requerimiento energetico y generador FV", marginX, 9);
-    doc.setFontSize(8.5); doc.setFont(undefined, "normal");
-    doc.text(`Proyecto: ${proyecto.nombre} | Fecha: ${proyecto.fecha} | Tipo: ${proyecto.tipoApp}`, marginX, 15);
-    y = 26;
-
-    doc.setTextColor(16, 25, 43);
-
-    doc.setFontSize(10.5); doc.setFont(undefined, "bold");
-    doc.text("Indicadores de consumo (Reto 01)", marginX, y);
-    y += 2;
-    autoTable(doc, {
-      startY: y, margin: { left: marginX, right: marginX }, theme: "grid",
-      styles: { fontSize: 8, cellPadding: 1.6 },
-      headStyles: { fillColor: [245, 166, 35], textColor: 20 },
-      head: [["Potencia instalada", "Demanda maxima", "Energia diaria", "Energia mensual", "Costo mensual", "Hora pico"]],
-      body: [[
-        `${(resultados.pInst / 1000).toFixed(2)} kW`,
-        `${(resultados.pMax / 1000).toFixed(2)} kW`,
-        `${resultados.energiaDia.toFixed(2)} kWh`,
-        `${resultados.energiaMes.toFixed(2)} kWh`,
-        `$ ${Math.round(resultados.costoMes)}`,
-        `${pad2(resultados.horaPico)}:00`,
-      ]],
-    });
-    y = doc.lastAutoTable.finalY + 6;
-
-    const d = dimension;
-    doc.setFontSize(10.5); doc.setFont(undefined, "bold");
-    doc.text("Generador fotovoltaico (Reto 02)", marginX, y);
-    y += 2;
-    doc.setFontSize(8); doc.setFont(undefined, "normal");
-    doc.text(
-      `Sitio: ${sitio.nombre} (${sitio.lat}, ${sitio.lon}) · Fuente: ${generadorState.modoRecurso === "api" && generadorState.apiStatus === "ok" ? "NASA POWER (consulta en vivo)" : sitio.fuente.slice(0, 90)}`,
-      marginX, y + 4, { maxWidth: pageW - marginX * 2 }
-    );
-    doc.text(
-      `Criterio: ${generadorState.criterioDimension === "anual" ? "promedio anual" : "mes critico"} (HSP=${hspUsado.toFixed(2)} kWh/m²·dia) · PR=${generadorState.pr} · Modulo: ${moduloActivo.fabricante} ${moduloActivo.modelo} (${gen_criterioTexto()})`,
-      marginX, y + 8
-    );
-    y += 11;
-
-    autoTable(doc, {
-      startY: y, margin: { left: marginX, right: marginX }, theme: "grid",
-      styles: { fontSize: 8, cellPadding: 1.6 },
-      headStyles: { fillColor: [16, 25, 43], textColor: 255 },
-      head: [["Ppico", "Modulos", "P. instalada", "Excedente", "Config.", "Voc gen (Tmin)", "I diseño", "Area gen"]],
-      body: [[
-        `${d.ppico.toFixed(2)} kWp`,
-        `${d.nTotal} × ${moduloActivo.potencia} Wp`,
-        `${(d.pInstalada / 1000).toFixed(2)} kWp`,
-        `${d.excedentePct >= 0 ? "+" : ""}${d.excedentePct.toFixed(1)} %`,
-        `${d.nParalelo} × ${d.nSerie} serie`,
-        `${d.vocGen.toFixed(1)} V`,
-        `${d.iDiseno.toFixed(1)} A`,
-        `${d.areaGen.toFixed(2)} m²${d.cabeEnArea ? "" : " (!)"}`,
-      ]],
-    });
-    y = doc.lastAutoTable.finalY + 6;
-
-    doc.setFontSize(10.5); doc.setFont(undefined, "bold");
-    doc.text(`Cuadro de cargas (${cargasCalc.length})`, marginX, y);
-    y += 2;
-    autoTable(doc, {
-      startY: y, margin: { left: marginX, right: marginX }, theme: "striped",
-      styles: { fontSize: 7.5, cellPadding: 1.4 },
-      headStyles: { fillColor: [90, 100, 114], textColor: 255 },
-      head: [["Item", "Carga", "Cant.", "P.unit [W]", "P.total [W]", "Clasificacion", "Horario"]],
-      body: cargasCalc.map((c) => [c.item, c.carga, c.cantidad, c.potenciaUnitaria, c.potenciaTotal, c.clasificacion, c.horarioTexto]),
-    });
-
-    doc.setFontSize(7); doc.setTextColor(140, 147, 160);
-    doc.text(
-      `Generado automaticamente · ${new Date().toLocaleString()} · Dias de operacion/mes: ${proyecto.diasMes} · CU: $${proyecto.cu}/kWh.`,
-      marginX, doc.internal.pageSize.getHeight() - 8
-    );
-
+    const doc = construirInforme({ proyecto, resultados, h: heredadosReto03, config: reto03, resultado: resultadoReto03 });
     doc.save(`Informe_${(proyecto.nombre || "proyecto").trim().replace(/\s+/g, "_")}.pdf`);
-    setStatus("Informe ejecutivo (PDF) generado y descargado.");
-  }
-
-  function gen_criterioTexto() {
-    return generadorState.moduloForzado ? "seleccion forzada" : "menor excedente, automatico";
+    setStatus("Informe ejecutivo PDF Reto 01+02+03 generado (una pagina).");
   }
 
   function escapeHtml(s) {
@@ -899,35 +843,29 @@ export default function Reto01Web() {
   }
 
   return (
-    <div style={{ fontFamily: "'Inter',Arial,sans-serif", background: "#EEF1F5", minHeight: "100%", color: "#16202E" }}>
-      <div style={{
-        background: "linear-gradient(135deg,#0B1220 0%,#132038 60%,#0B1220 100%)",
-        padding: "18px 24px", position: "relative", overflow: "hidden",
-      }}>
-        <StepStripe />
-        <div style={{ position: "relative", display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 8 }}>
-          <div>
-            <div style={{ fontSize: 20, fontWeight: 800, color: "#fff", letterSpacing: ".01em" }}>
-              RETO 01-02 · Requerimiento energetico y generador FV
-            </div>
-            <div style={{ fontSize: 12, color: "#9FB0C9", marginTop: 2 }}>
-              Version web · React · misma aplicacion, sin reingreso de datos (RF-13)
-            </div>
-          </div>
-          <div style={{ fontSize: 11, color: "#F5A623", fontFamily: "'Courier New',monospace", textAlign: "right", maxWidth: 420 }}>
-            {status}
-          </div>
+    <div className="esfv-app">
+      <header className="app-header">
+        <div className="app-brand"><div className="app-brand-icon"><Sun size={27} /></div><div>
+          <small>ESFV · RETO 03</small><h1>Tu sistema solar</h1><p>{proyecto.nombre}</p>
+        </div></div>
+        <div className="app-toolbar">
+          <button onClick={onGuardarProyecto}><Save size={15} /> Guardar proyecto</button>
+          <button onClick={onCargarProyectoClick}><FolderOpen size={15} /> Abrir proyecto</button>
+          <button onClick={onGenerarInformePDF} disabled={resultados.energiaDia <= 0}><FileDown size={15} /> Descargar informe</button>
         </div>
-      </div>
-
-      <div style={{ display: "flex", gap: 4, padding: "10px 24px 0", background: "#EEF1F5", flexWrap: "wrap" }}>
-        <TabButton n="1" label="Proyecto / contexto" active={tab === "proyecto"} onClick={() => setTab("proyecto")} />
-        <TabButton n="2" label="Cuadro de cargas" active={tab === "cargas"} onClick={() => setTab("cargas")} />
-        <TabButton n="3" label="Resultados" active={tab === "resultados"} onClick={() => setTab("resultados")} />
-        <TabButton n="4" label="Generador FV" active={tab === "generador"} onClick={() => setTab("generador")} />
-      </div>
-
-      <div style={{ padding: 24 }}>
+      </header>
+      <nav className="app-nav" aria-label="Pasos del proyecto">
+        <TabButton n="1" label="Proyecto" active={tab === "proyecto"} onClick={() => setTab("proyecto")} />
+        <TabButton n="2" label="Aparatos" active={tab === "cargas"} onClick={() => setTab("cargas")} />
+        <TabButton n="3" label="Consumo" active={tab === "resultados"} onClick={() => setTab("resultados")} />
+        <TabButton n="4" label="Paneles solares" active={tab === "generador"} onClick={() => setTab("generador")} />
+        <TabButton n="5" label="Inversor y baterías" active={tab === "reto03"} onClick={() => setTab("reto03")} />
+      </nav>
+      <div className="app-status" role="status">{status}</div>
+      <main className="app-main">
+        {tab === "reto03" && <Reto03Tab heredados={heredadosReto03} config={reto03} setConfig={setReto03}
+          catalogos={catalogosReto03} setCatalogos={actualizarCatalogosReto03} resultado={resultadoReto03}
+          errorCatalogo={errorCatalogoReto03} onIr={setTab} onEjemplo={onCargarEjemplo} />}
         {tab === "proyecto" && (
           <ProyectoTab proyecto={proyecto} setProyecto={setProyecto} criterio={criterio}
             onValidar={() => {
@@ -953,10 +891,8 @@ export default function Reto01Web() {
               onEliminar(c);
             }}
             cargasCalc={cargasCalc} onSeleccionarFila={onSeleccionarFila}
-            onImportarExcelClick={onImportarExcelClick} onGuardarProyecto={onGuardarProyecto}
-            onCargarProyectoClick={onCargarProyectoClick}
-            onRecalcular={() => setStatus("Resultados recalculados.")}
-            factoresInfo={factoresInfo}
+            onImportarExcelClick={onImportarExcelClick}
+            factoresInfo={factoresInfo || "Puedes agregar aparatos o importar una hoja de cálculo."}
           />
         )}
 
@@ -980,7 +916,11 @@ export default function Reto01Web() {
             onImportarBaseSolarClick={onImportarBaseSolarClick}
           />
         )}
-      </div>
+        {tab !== 'reto03' && <div className="app-step-footer"><button onClick={() => setTab(({ proyecto: 'cargas', cargas: 'resultados', resultados: 'generador', generador: 'reto03' })[tab])}>
+          {({ proyecto: 'Continuar con mis aparatos', cargas: 'Ver mi consumo', resultados: 'Elegir paneles solares', generador: 'Continuar con inversor y baterías' })[tab]} <ArrowRight size={16} />
+        </button></div>}
+      </main>
+      <footer className="app-footer"><span>Reto 03 · Energía Solar Fotovoltaica · Universidad del Magdalena</span><a href="./guia-tecnica.html" target="_blank" rel="noreferrer">Guía técnica</a></footer>
 
       <input ref={fileExcelRef} type="file" accept=".xlsx,.xls" style={{ display: "none" }} onChange={onImportarExcel} />
       <input ref={fileProyectoRef} type="file" accept=".json" style={{ display: "none" }} onChange={onCargarProyecto} />
@@ -1114,7 +1054,7 @@ function rbPromedioMensual(latDeg, tiltDeg, n, azimutDeg) {
   return den > 0 ? num / den : 1;
 }
 
-function transponerATiltoMensual({ lat, tiltDeg, azimutDeg, ghi, dni, dif, rho = 0.2 }) {
+function transponerATiltoMensual({ lat, tiltDeg, azimutDeg, ghi, dif, rho = 0.2 }) {
   const beta = toRad(tiltDeg);
   return ghi.map((H, i) => {
     const n = DIAS_REPRESENTATIVOS[i];
@@ -1126,124 +1066,23 @@ function transponerATiltoMensual({ lat, tiltDeg, azimutDeg, ghi, dni, dif, rho =
   });
 }
 
-function evaluarCatalogo({ ed, hsp, pr, vMaxSistema, tMin, catalogo }) {
-  const ppico = hsp > 0 && pr > 0 ? ed / (hsp * pr) : 0;
-
-  const opciones = (catalogo || []).map((m) => {
-    const vocM = m.voc * (1 + (m.beta / 100) * (tMin - 25));
-    if (vocM > vMaxSistema) {
-      return { id: m.id, nombre: `${m.fabricante} ${m.modelo}`, descartado: true,
-        motivo: `Voc a Tmin (${vocM.toFixed(1)} V) supera la tensión máxima (${vMaxSistema} V).` };
-    }
-    
-    const nsMax = Math.floor(vMaxSistema / vocM);
-    if (nsMax < 1) {
-       return { id: m.id, nombre: `${m.fabricante} ${m.modelo}`, descartado: true,
-        motivo: `Inviable: No cabe ni 1 módulo bajo ${vMaxSistema}V a Tmin.` };
-    }
-    
-    const nNec = Math.max(1, Math.ceil((ppico * 1000) / m.potencia));
-    const ns = Math.min(nNec, nsMax);
-    const np = Math.ceil(nNec / ns);
-    const nt = ns * np;
-    const pInst = nt * m.potencia;
-    const exc = ppico > 0 ? ((pInst / 1000 - ppico) / ppico) * 100 : 0;
-    return { id: m.id, nombre: `${m.fabricante} ${m.modelo}`, nTotal: nt, pInst, excedentePct: exc, descartado: false };
-  });
-
-  const viables = opciones.filter((o) => !o.descartado);
-  const mejorOpcion = viables.length > 0 ? viables.slice().sort((a, b) => Math.abs(a.excedentePct) - Math.abs(b.excedentePct))[0] : null;
-
-  return { ppico, opciones, mejorOpcion, hayViables: viables.length > 0 };
-}
-
-function calcularGenerador({ ed, hsp, pr, modulo, vMaxSistema, tMin, tOp, areaDisponible, catalogo }) {
-  const { opciones, mejorOpcion, hayViables } = evaluarCatalogo({ ed, hsp, pr, vMaxSistema, tMin, catalogo });
-  
-  const errores = [];
-  if (hsp <= 0) errores.push("El recurso solar (HSP) debe ser mayor que cero.");
-  if (pr <= 0 || pr > 1) errores.push("El factor de desempeño (PR) debe estar entre 0.01 y 1.00.");
-  if (vMaxSistema <= 0) errores.push("La tensión máxima del sistema debe ser mayor que 0 V.");
-  if (areaDisponible <= 0) errores.push("El área disponible debe ser declarada (> 0 m²).");
-  if (tMin < -40 || tMin > 60) errores.push("Temperatura mínima fuera de un rango terrestre razonable (-40 a 60 °C).");
-  if (tOp < -20 || tOp > 85) errores.push("Temperatura de operación fuera de rango razonable (-20 a 85 °C).");
-  if (!hayViables) errores.push("Ningún módulo del catálogo es viable bajo las restricciones de tensión declaradas.");
-
-  if (errores.length > 0) return { bloqueado: true, errores, opciones, mejorOpcion };
-
-  const ppico = ed / (hsp * pr); 
-  const vocModTmin = modulo.voc * (1 + (modulo.beta / 100) * (tMin - 25));
-  const nSerieMax = Math.floor(vMaxSistema / vocModTmin);
-
-  if (nSerieMax < 1) {
-     return { bloqueado: true, errores: [`El módulo forzado manualmente (${modulo.modelo}) NO ES VIABLE. Su Voc a Tmin (${vocModTmin.toFixed(1)} V) supera el límite de ${vMaxSistema} V.`], opciones, mejorOpcion };
-  }
-
-  const nNecesarios = Math.max(1, Math.ceil((ppico * 1000) / modulo.potencia));
-  const nSerie = Math.min(nNecesarios, nSerieMax);
-  const nParalelo = Math.ceil(nNecesarios / nSerie);
-  const nTotal = nSerie * nParalelo;
-  const pInstalada = nTotal * modulo.potencia; 
-  const excedentePct = ppico > 0 ? ((pInstalada / 1000 - ppico) / ppico) * 100 : 0;
-  const vocGen = nSerie * vocModTmin;
-  const tCelda = tOp + ((modulo.noct - 20) / 800) * 1000;
-  const vmpGenOperacion = nSerie * modulo.vmp * (1 + (modulo.beta / 100) * (tCelda - 25));
-  const iscGen = nParalelo * modulo.isc;
-  const iDiseno = 1.25 * 1.25 * iscGen; 
-  const areaGen = nTotal * modulo.area;
-  const energiaGenerador = (pInstalada / 1000) * hsp * pr;
-
-  return {
-    bloqueado: false, errores: [],
-    ppico, nSerieMax, nNecesarios, nSerie, nParalelo, nTotal, pInstalada, excedentePct,
-    vocModTmin, vocGen, tCelda, vmpGenOperacion, iscGen, iDiseno, areaGen, energiaGenerador,
-    opciones, mejorOpcion, cabeEnArea: areaGen <= areaDisponible,
-  };
-}
-
 /* ============================================================
    SUBCOMPONENTES COMPARTIDOS
    ============================================================ */
 
-function StepStripe() {
-  const pts = "0,26 0,10 40,10 40,20 80,20 80,4 120,4 120,16 160,16 160,26";
-  return (
-    <svg viewBox="0 0 160 26" preserveAspectRatio="none" style={{
-      position: "absolute", right: 0, bottom: 0, width: "220px", height: "60px", opacity: 0.35,
-    }}>
-      <polyline points={pts} fill="none" stroke="#F5A623" strokeWidth="1.4" />
-    </svg>
-  );
-}
-
 function TabButton({ n, label, active, onClick }) {
-  return (
-    <button onClick={onClick} style={{
-      padding: "10px 18px", border: "none", cursor: "pointer",
-      borderRadius: "8px 8px 0 0", fontSize: 13, fontWeight: 700,
-      background: active ? "#fff" : "transparent",
-      color: active ? "#10192B" : "#5A6472",
-      borderBottom: active ? "3px solid #F5A623" : "3px solid transparent",
-      display: "flex", alignItems: "center", gap: 6,
-    }}>
-      <span style={{
-        display: "inline-flex", alignItems: "center", justifyContent: "center",
-        width: 18, height: 18, borderRadius: 999, fontSize: 11,
-        background: active ? "#F5A623" : "#D7DCE3", color: active ? "#10192B" : "#5A6472",
-      }}>{n}</span>
-      {label}
-    </button>
-  );
+  return <button className={`app-tab${active ? ' active' : ''}`} aria-current={active ? 'step' : undefined} onClick={onClick}>
+    <span>{n}</span>{label}
+  </button>;
 }
 
 function Field({ label, children, hint }) {
-  return (
-    <div style={{ marginBottom: 14 }}>
-      <label style={{ display: "block", fontSize: 12, fontWeight: 700, color: "#3A4453", marginBottom: 5 }}>{label}</label>
-      {children}
-      {hint && <div style={{ fontSize: 10.5, color: "#8A93A0", marginTop: 3 }}>{hint}</div>}
-    </div>
-  );
+  const id = useId();
+  return <div style={{ marginBottom: 14 }}>
+    <label htmlFor={id} style={{ display: 'block', fontSize: 12, fontWeight: 700, color: '#3A4453', marginBottom: 5 }}>{label}</label>
+    {Children.map(children, child => isValidElement(child) && ['input', 'select', 'textarea'].includes(child.type) ? cloneElement(child, { id }) : child)}
+    {hint && <div style={{ fontSize: 11, color: '#627487', marginTop: 5 }}>{hint}</div>}
+  </div>;
 }
 
 const inputStyle = {
@@ -1261,7 +1100,7 @@ const btnDanger = { ...btnPrimary, background: "#fff", color: "#B3261E", border:
 
 function Panel({ title, children, style, icon: Icon }) {
   return (
-    <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #E1E4E9", padding: 16, ...style }}>
+    <div className="app-panel" style={{ background: "#fff", borderRadius: 12, border: "1px solid #E1E4E9", padding: 16, ...style }}>
       {title && (
         <div style={{ fontSize: 13, fontWeight: 800, color: "#10192B", marginBottom: 12, display: "flex", alignItems: "center", gap: 6 }}>
           {Icon && <Icon size={15} />} {title}
@@ -1277,21 +1116,21 @@ function Panel({ title, children, style, icon: Icon }) {
 function ProyectoTab({ proyecto, setProyecto, criterio, onValidar }) {
   const set = (k) => (e) => setProyecto((p) => ({ ...p, [k]: e.target.value }));
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr", gap: 20 }}>
+    <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr", gap: 20 }}>
       <Panel title="Datos del proyecto">
         <Field label="Nombre / ID del proyecto">
           <input style={inputStyle} value={proyecto.nombre} onChange={set("nombre")} />
         </Field>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+        <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
           <Field label="Fecha">
             <input type="date" style={inputStyle} value={proyecto.fecha} onChange={set("fecha")} />
           </Field>
           <Field label="Tipo de aplicacion">
             <select style={inputStyle} value={proyecto.tipoApp} onChange={set("tipoApp")}>
-              <option>Off-grid</option>
-              <option>On-grid</option>
-              <option>Hibrido off-grid</option>
-              <option>Hibrido on-grid</option>
+              <option value="Off-grid">Sin red eléctrica (off-grid)</option>
+              <option value="On-grid">Conectado a la red (on-grid)</option>
+              <option value="Hibrido off-grid">Híbrido sin red eléctrica</option>
+              <option value="Hibrido on-grid">Híbrido conectado a la red</option>
             </select>
           </Field>
         </div>
@@ -1299,7 +1138,7 @@ function ProyectoTab({ proyecto, setProyecto, criterio, onValidar }) {
           <textarea style={{ ...inputStyle, minHeight: 80, fontFamily: "inherit", resize: "vertical" }}
             value={proyecto.integrantes} onChange={set("integrantes")} />
         </Field>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+        <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
           <Field label="Dias de operacion al mes">
             <input type="number" min={1} max={31} style={inputStyle} value={proyecto.diasMes}
               onChange={(e) => setProyecto((p) => ({ ...p, diasMes: Number(e.target.value) }))} />
@@ -1312,15 +1151,13 @@ function ProyectoTab({ proyecto, setProyecto, criterio, onValidar }) {
         <button style={btnPrimary} onClick={onValidar}><CheckCircle2 size={15} /> Validar datos del proyecto</button>
       </Panel>
 
-      <Panel title="Contexto de operacion">
+      <Panel title="Cómo usar el proyecto">
         <div style={{ fontSize: 12, color: "#5A6472", lineHeight: 1.6 }}>
-          Este avance registra el contexto del proyecto y usa el cuadro de cargas para reconstruir
-          el perfil de demanda de 24 horas. El criterio dia/noche configurado en la pestaña de
-          Resultados es: <b>{pad2(criterio.inicio)}:00 - {pad2(criterio.fin === 24 ? 0 : criterio.fin)}:00</b> (diurno).
+          Añade tus aparatos y sus horarios, revisa los paneles y elige el inversor y las baterías.
+          Puedes guardar el proyecto y continuar después.
         </div>
         <div style={{ marginTop: 16, padding: 12, background: "#FFF8EC", border: "1px solid #F5DBA5", borderRadius: 8, fontSize: 12, color: "#8A5A00" }}>
-          <b>Tipo de aplicacion seleccionado:</b> {proyecto.tipoApp}. Este dato tambien condiciona
-          el factor global de desempeño sugerido en la pestaña "4. Generador FV" (Reto 02).
+          <b>Sistema seleccionado:</b> {proyecto.tipoApp}. Horario diurno: {pad2(criterio.inicio)}:00 a {pad2(criterio.fin)}:00.
         </div>
       </Panel>
     </div>
@@ -1333,34 +1170,37 @@ function CargasTab(props) {
   const {
     form, setForm, formError, preview, seleccionId, onAgregar, onLimpiar, onVerificar,
     onEliminarSeleccion, cargasCalc, onSeleccionarFila, onImportarExcelClick,
-    onGuardarProyecto, onCargarProyectoClick, onRecalcular, factoresInfo,
+    factoresInfo,
   } = props;
 
   const clas = claseColor(preview.texto);
   const Icon = clas.icon;
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "340px 1fr", gap: 20, alignItems: "start" }}>
-      <Panel title={seleccionId != null ? "Editando carga seleccionada" : "Ingreso de carga"}>
-        <Field label="Carga">
+    <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "340px 1fr", gap: 20, alignItems: "start" }}>
+      <Panel title={seleccionId != null ? "Editar aparato" : "Agregar un aparato"}>
+        <Field label="Nombre del aparato">
           <input style={inputStyle} value={form.carga}
             onChange={(e) => setForm((f) => ({ ...f, carga: e.target.value }))} placeholder="Ej.: Aire acondicionado" />
         </Field>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+        <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
           <Field label="Cantidad">
             <input type="number" min={1} style={inputStyle} value={form.cantidad}
               onChange={(e) => setForm((f) => ({ ...f, cantidad: Number(e.target.value) }))} />
           </Field>
-          <Field label="Potencia [W]">
+          <Field label="Potencia [W]" hint="Busca los vatios (W) en la etiqueta del aparato.">
             <input type="number" min={0} style={inputStyle} value={form.potencia}
               onChange={(e) => setForm((f) => ({ ...f, potencia: Number(e.target.value) }))} />
           </Field>
         </div>
-        <Field label="Horario(s)">
+        <div className="app-schedules" aria-label="Horarios habituales">
+          {[['Todo el día', '00-24'], ['Solo de día', '06-18'], ['Solo de noche', '18-06']].map(([texto, horario]) => <button key={horario} type="button" aria-pressed={form.horarioTexto === horario} onClick={() => setForm(f => ({ ...f, horarioTexto: horario }))}>{texto}</button>)}
+        </div>
+        <Field label="Horario de uso">
           <input style={inputStyle} value={form.horarioTexto}
             onChange={(e) => setForm((f) => ({ ...f, horarioTexto: e.target.value }))} placeholder="08-12;14-17" />
           <div style={{ fontSize: 11, color: "#8A93A0", marginTop: 4 }}>
-            Ej.: 08-12;14-17;20-02. Intervalo [inicio, fin). Separe varios con ";".
+            Ejemplo: 08-12;14-17 significa de 8 a 12 y de 14 a 17 horas.
           </div>
         </Field>
 
@@ -1392,10 +1232,7 @@ function CargasTab(props) {
       <Panel title="Cuadro de cargas">
         <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
           <button style={btnSecondary} onClick={onImportarExcelClick}><Upload size={14} /> Importar linea base Excel</button>
-          <button style={btnSecondary} onClick={onGuardarProyecto}><Save size={14} /> Guardar proyecto</button>
-          <button style={btnSecondary} onClick={onCargarProyectoClick}><FolderOpen size={14} /> Cargar proyecto</button>
           <div style={{ flex: 1 }} />
-          <button style={btnSecondary} onClick={onRecalcular}><RotateCcw size={14} /> Recalcular resultados</button>
         </div>
 
         <div style={{ overflowX: "auto", border: "1px solid #E1E4E9", borderRadius: 8 }}>
@@ -1437,7 +1274,7 @@ function CargasTab(props) {
             </tbody>
           </table>
         </div>
-        <div style={{ fontSize: 11, color: "#8A93A0", marginTop: 10 }}>{factoresInfo}</div>
+        <div style={{ fontSize: 11, color: "#8A93A0", marginTop: 10 }}>{factoresInfo || "Puedes agregar aparatos o importar una hoja de cálculo."}</div>
         <div style={{ fontSize: 11, color: "#8A93A0", marginTop: 4 }}>
           Clic sobre una fila para editarla o eliminarla desde el panel izquierdo.
         </div>
@@ -1464,7 +1301,7 @@ function ResultadosTab({ resultados, chartData, criterio, setCriterio, nCargas, 
 
   return (
     <div>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginBottom: 18 }}>
+      <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginBottom: 18 }}>
         {tarjetas.map((t) => (
           <div key={t.titulo} style={{
             background: "#fff", border: "1px solid #E1E4E9", borderRadius: 12, padding: "12px 14px",
@@ -1479,7 +1316,7 @@ function ResultadosTab({ resultados, chartData, criterio, setCriterio, nCargas, 
         ))}
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "2.1fr 1fr", gap: 16, marginBottom: 18 }}>
+      <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "2.1fr 1fr", gap: 16, marginBottom: 18 }}>
         <Panel title="Perfil horario de demanda · 24 h">
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
@@ -1514,7 +1351,7 @@ function ResultadosTab({ resultados, chartData, criterio, setCriterio, nCargas, 
         </Panel>
       </div>
 
-      <Panel title="Criterio temporal, estado de la linea base e informe">
+      <Panel title="Horario del día e informe">
         <div style={{ display: "flex", flexWrap: "wrap", gap: 20, alignItems: "flex-end" }}>
           <Field label="Inicio dia">
             <input type="number" min={0} max={23} style={{ ...inputStyle, width: 90 }} value={criterio.inicio}
@@ -1529,7 +1366,7 @@ function ResultadosTab({ resultados, chartData, criterio, setCriterio, nCargas, 
           </div>
           <div style={{ flex: 1 }} />
           <button style={btnPrimary} onClick={onGenerarInformePDF}><FileDown size={14} /> Generar informe (PDF)</button>
-          <button style={btnSecondary} onClick={onGenerarInforme}><FileDown size={14} /> Version .html</button>
+          <button style={btnSecondary} onClick={onGenerarInforme}><FileDown size={14} /> Informe detallado (HTML)</button>
         </div>
         <div style={{ marginTop: 8, fontSize: 12.5, color: "#3A4453", display: "flex", alignItems: "center", gap: 6 }}>
           <ListChecks size={14} />
@@ -1556,15 +1393,10 @@ function GeneradorTab(props) {
 
   return (
     <div>
-      <div style={{
-        fontSize: 11.5, color: "#5A6472", background: "#fff", border: "1px solid #E1E4E9",
-        borderRadius: 10, padding: "8px 12px", marginBottom: 14, display: "flex", alignItems: "center", gap: 6,
-      }}>
-        <Database size={13} style={{ flexShrink: 0 }} /> {fuenteDatosInfo}
-      </div>
+      <details className="app-details"><summary>Origen de los datos solares y del catálogo</summary><p>{fuenteDatosInfo}</p></details>
 
-      <Panel icon={PanelsTopLeft} title="Datos heredados del Reto 01 (sin reingreso — RF-13)" style={{ marginBottom: 16 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12 }}>
+      <Panel icon={PanelsTopLeft} title="Tu consumo de energía" style={{ marginBottom: 16 }}>
+        <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12 }}>
           {[
             { t: "Energia diaria (Ed)", v: `${resultados.energiaDia.toFixed(2)} kWh/dia` },
             { t: "Demanda maxima (Pmax)", v: `${(resultados.pMax / 1000).toFixed(2)} kW` },
@@ -1579,13 +1411,13 @@ function GeneradorTab(props) {
         </div>
       </Panel>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
-        <Panel icon={Sun} title="Recurso solar (RF-14, RF-15, RF-16)">
+      <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+        <Panel icon={Sun} title="Sol disponible en tu ubicación">
           <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
             <button style={gen.modoRecurso === "local" ? btnPrimary : btnSecondary}
-              onClick={() => setGen({ modoRecurso: "local" })}><Database size={14} /> Base de datos local</button>
+              onClick={() => setGen({ modoRecurso: "local" })}><Database size={14} /> Elegir ubicación</button>
             <button style={gen.modoRecurso === "api" ? btnPrimary : btnSecondary}
-              onClick={() => setGen({ modoRecurso: "api" })}><Wifi size={14} /> Consultar API (NASA POWER)</button>
+              onClick={() => setGen({ modoRecurso: "api" })}><Wifi size={14} /> Consultar datos de la NASA</button>
           </div>
 
           {gen.modoRecurso === "local" ? (
@@ -1606,7 +1438,7 @@ function GeneradorTab(props) {
             </>
           ) : (
             <>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                 <Field label="Latitud (°)">
                   <input type="number" step="0.01" min="-90" max="90" style={inputStyle} value={gen.lat}
                     onChange={(e) => setGen({ lat: Number(e.target.value) })} />
@@ -1651,7 +1483,7 @@ function GeneradorTab(props) {
           </div>
         </Panel>
 
-        <Panel icon={CalendarDays} title="Irradiacion mensual en el plano del generador [kWh/m²·dia]">
+        <Panel icon={CalendarDays} title="Energía solar disponible por mes [kWh/m²·día]">
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={datosMensuales} margin={{ top: 6, right: 10, left: -10, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#EEF1F5" />
@@ -1662,15 +1494,16 @@ function GeneradorTab(props) {
             </BarChart>
           </ResponsiveContainer>
           <div style={{ fontSize: 11, color: "#5A6472", marginTop: 6 }}>
-            HSP usado para el dimensionamiento: <b>{hspUsado.toFixed(2)} kWh/m²·día</b> ({gen.criterioDimension === "anual" ? "promedio anual" : "mes critico"}).
+            Sol disponible para el cálculo: <b>{hspUsado.toFixed(2)} kWh/m²·día</b> ({gen.criterioDimension === "anual" ? "promedio anual" : "mes critico"}).
           </div>
         </Panel>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
-        <Panel icon={Settings2} title="Parametros de diseño">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <Field label="Factor global de desempeño (PR)" hint="Off-grid ~0.65-0.70 · On-grid ~0.75-0.80">
+      <details className="app-details"><summary>Opciones avanzadas y catálogo de paneles</summary>
+      <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
+        <Panel icon={Settings2} title="Ajustes de los paneles">
+          <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <Field label="Rendimiento esperado de los paneles (PR)" hint="El valor 0,70 considera pérdidas del generador.">
               <input type="number" step="0.01" min="0.3" max="0.95" style={inputStyle} value={gen.pr}
                 onChange={(e) => setGen({ pr: Number(e.target.value) })} />
             </Field>
@@ -1700,7 +1533,7 @@ function GeneradorTab(props) {
           </div>
         </Panel>
 
-        <Panel icon={Grid3x3} title="Catalogo de modulos (criterio: menor excedente de potencia)">
+        <Panel icon={Grid3x3} title="Comparar paneles solares">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
             <label style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 11.5, color: "#3A4453" }}>
               <input type="checkbox" checked={gen.moduloForzado}
@@ -1746,7 +1579,7 @@ function GeneradorTab(props) {
           {dimension.opciones?.some((o) => o.descartado) && (
             <div style={{ fontSize: 10.5, color: "#8A93A0", marginTop: 6 }}>
               Descartado = su Voc corregido a Tmin supera la tensión máxima del
-              sistema declarada; ninguna cadena en serie es viable bajo ${gen.vMaxSistema} V (RF-23).
+              sistema declarada; ninguna cadena en serie es viable bajo ${gen.vMaxSistema} V.
             </div>
           )}
           <div style={{ fontSize: 11, color: "#5A6472", marginTop: 8 }}>
@@ -1757,11 +1590,13 @@ function GeneradorTab(props) {
         </Panel>
       </div>
 
-      <Panel icon={Zap} title="Resultado del dimensionamiento (RF-18 a RF-22)">
+      </details>
+
+      <Panel icon={Zap} title="Tus paneles solares">
         {dimension.bloqueado ? (
           <div style={{ padding: 16, background: "#FDEDEC", color: "#B3261E", borderRadius: 8, border: "1px solid #F2C6C2" }}>
             <div style={{ fontWeight: 800, marginBottom: 8, display: "flex", alignItems: "center", gap: 6 }}>
-              <AlertTriangle size={16} /> CÁLCULO BLOQUEADO POR INVIABILIDAD O PARÁMETROS FUERA DE RANGO
+              <AlertTriangle size={16} /> Revisa estos datos para calcular los paneles
             </div>
             <ul style={{ margin: 0, paddingLeft: 20 }}>
               {dimension.errores.map((err, idx) => <li key={idx} style={{ fontSize: 13, marginBottom: 4 }}>{err}</li>)}
@@ -1769,12 +1604,15 @@ function GeneradorTab(props) {
           </div>
         ) : (
           <>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginBottom: 14 }}>
+            <div className="app-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginBottom: 14 }}>
               <Metric titulo="Potencia pico requerida" valor={`${dimension.ppico.toFixed(2)} kWp`} />
               <Metric titulo="Modulos seleccionados" valor={`${dimension.nTotal} × ${modulo.potencia} Wp`} />
               <Metric titulo="Potencia instalada" valor={`${(dimension.pInstalada / 1000).toFixed(2)} kWp`} />
               <Metric titulo="Excedente / deficit" valor={`${dimension.excedentePct >= 0 ? "+" : ""}${dimension.excedentePct.toFixed(1)} %`}
                 warn={Math.abs(dimension.excedentePct) > 25} />
+            </div>
+            <details className="app-details"><summary>Ver conexión y comprobaciones eléctricas de los paneles</summary>
+              <div className="app-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12 }}>
               <Metric titulo="Configuracion" valor={`${dimension.nParalelo} cadena(s) × ${dimension.nSerie} en serie`} />
               <Metric titulo="Max. modulos en serie" valor={`${dimension.nSerieMax} (límite ${gen.vMaxSistema} V)`} />
               <Metric titulo="Voc generador (Tmin)" valor={`${dimension.vocGen.toFixed(1)} V`} />
@@ -1784,7 +1622,8 @@ function GeneradorTab(props) {
               <Metric titulo="Temp. celda estimada" valor={`${dimension.tCelda.toFixed(1)} °C`} hint="Modelo NOCT" />
               <Metric titulo="Area del generador" valor={`${dimension.areaGen.toFixed(2)} m²`}
                 warn={!dimension.cabeEnArea} />
-            </div>
+              </div>
+            </details>
             {!dimension.cabeEnArea && (
               <div style={{ display: "flex", gap: 8, padding: "8px 10px", background: "#FDEDEC", color: "#B3261E", borderRadius: 8, fontSize: 12, marginBottom: 10 }}>
                 <AlertTriangle size={15} style={{ flexShrink: 0 }} />
@@ -1792,13 +1631,12 @@ function GeneradorTab(props) {
               </div>
             )}
             <div style={{ fontSize: 11.5, color: "#5A6472", lineHeight: 1.6 }}>
-              Energia diaria estimada del generador: <b>{dimension.energiaGenerador.toFixed(2)} kWh/dia</b> (Pinstalada × HSP × PR).
-              Supuestos: factor global de desempeño PR = {gen.pr}; temperatura de celda por modelo NOCT con G=1000 W/m²;
-              corrección de tensión con el coeficiente β del Voc aplicado también al Vmp.
+              Producción estimada de los paneles: <b>{dimension.energiaGenerador.toFixed(2)} kWh al día</b>.
+              <details className="app-details"><summary>Ver método de cálculo</summary>PR = {gen.pr}; temperatura de celda por modelo NOCT con G=1000 W/m²; corrección de Voc y Vmp con βVoc.</details>
             </div>
             <div style={{ marginTop: 14, display: "flex", gap: 8 }}>
-              <button style={btnPrimary} onClick={onGenerarInformePDF}><FileDown size={14} /> Generar informe PDF (Reto 01+02)</button>
-              <button style={btnSecondary} onClick={onGenerarInforme}><FileDown size={14} /> Version .html</button>
+              <button style={btnPrimary} onClick={onGenerarInformePDF}><FileDown size={14} /> Descargar informe</button>
+              <button style={btnSecondary} onClick={onGenerarInforme}><FileDown size={14} /> Informe detallado (HTML)</button>
             </div>
           </>
         )}

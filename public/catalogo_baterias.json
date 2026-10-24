@@ -1,0 +1,4 @@
+[
+  { "id": "tdr-agm", "origen": "tdr", "fabricante": "Referencia TdR (sin fabricante)", "modelo": "AGM declarada 12 V / 200 Ah", "tecnologia": "AGM", "voltaje": 12, "claseNominal": 12, "ah": 200, "dod": 0.5, "eficiencia": 0.8, "cCarga": 0.2, "cDescarga": null, "vida": 4, "fuente": "TdR Reto 03 ESFV 2026-II, seccion 6, pagina 3. Valores ilustrativos, no equipo comercial." },
+  { "id": "tdr-lfp", "origen": "tdr", "fabricante": "Referencia TdR (sin fabricante)", "modelo": "LFP declarada 51,2 V / 100 Ah", "tecnologia": "LFP", "voltaje": 51.2, "claseNominal": 48, "ah": 100, "dod": 0.8, "eficiencia": 0.92, "cCarga": 0.5, "cDescarga": null, "vida": 10, "maxSerie": 1, "fuente": "TdR Reto 03 ESFV 2026-II, seccion 6, pagina 3. Valores ilustrativos, no equipo comercial." }
+]
