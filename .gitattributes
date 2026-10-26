@@ -1,0 +1,5 @@
+*.pdf binary
+*.png binary
+entrega/reto03/**/*.json text eol=lf
+entrega/reto03/**/*.csv text eol=lf
+entrega/reto03/manifest.json text eol=lf

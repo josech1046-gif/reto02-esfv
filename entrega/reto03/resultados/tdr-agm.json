@@ -1,0 +1,774 @@
+{
+  "proyecto": {
+    "nombre": "Caso TdR - AGM",
+    "fecha": "2026-10-25",
+    "integrantes": "Nicolas Paz",
+    "tipoApp": "Off-grid",
+    "diasMes": 30,
+    "cu": 1000
+  },
+  "resultados": {
+    "perfil": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      430,
+      430,
+      430,
+      430,
+      430,
+      430,
+      430,
+      430,
+      430,
+      910,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "pMax": 910,
+    "horaPico": 17,
+    "energiaDia": 7.58,
+    "pInst": 1140,
+    "energiaMes": 227.4,
+    "costoMes": 227400
+  },
+  "h": {
+    "edWh": 7580,
+    "perfil": [
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200,
+      430,
+      430,
+      430,
+      430,
+      430,
+      430,
+      430,
+      430,
+      430,
+      910,
+      200,
+      200,
+      200,
+      200,
+      200,
+      200
+    ],
+    "pMax": 910,
+    "horaPico": 17,
+    "dentroWh": 5180,
+    "fueraWh": 2400,
+    "tipoApp": "Off-grid",
+    "diasMes": 30,
+    "potenciaWp": 2200,
+    "ns": 4,
+    "np": 1,
+    "modulo": {
+      "id": "tdr550",
+      "fabricante": "Referencia TdR",
+      "modelo": "Caso Oficial 550W",
+      "potencia": 550,
+      "voc": 49.5,
+      "isc": 14,
+      "vmp": 41.5,
+      "imp": 13.3,
+      "beta": -0.27,
+      "alpha": 0.05,
+      "gamma": -0.35,
+      "noct": 45,
+      "celdas": 72,
+      "area": 2.58,
+      "eficiencia": 21.3,
+      "fuente": "Caso de prueba oficial TdR Reto 02",
+      "fechaConsulta": "2026-10-03"
+    },
+    "tMin": 20,
+    "tCelda": 63.2,
+    "hspAnual": 5.8,
+    "hspCritico": 5.2,
+    "pr": 0.7,
+    "requeridaReto02Wp": 1866.995073891626,
+    "excedenteReto02Pct": 17.836411609498672,
+    "areaGenerador": 10.32,
+    "areaDisponible": 20,
+    "corrienteDisenoReto02": 21.875,
+    "limitarPorArea": false,
+    "recursoNombre": "Nazareth TdR",
+    "recursoFuente": "Caso estandarizado TdR",
+    "errores": []
+  },
+  "config": {
+    "rama": "auto",
+    "catalogo": "tdr",
+    "etaInv": 0.9,
+    "autonomia": 2,
+    "dod": 0.5,
+    "factorTemp": 1,
+    "vBanco": 48,
+    "vNominal": 48,
+    "etaBat": 0.8,
+    "bateriaId": "tdr-agm",
+    "equipoCon": "ctrl-b",
+    "equipoSin": "inv-b",
+    "dcAcMin": 1,
+    "dcAcMax": 1.3,
+    "ajuste": null,
+    "ns": null
+  },
+  "resultado": {
+    "rama": "con",
+    "errores": [],
+    "arreglo": {
+      "ns": 4,
+      "np": 1,
+      "nTotal": 4,
+      "potenciaWp": 2200
+    },
+    "balance": {
+      "ecc": 8422.222222222223,
+      "energiaGenerar": 10527.777777777777,
+      "anual": {
+        "produccion": 8932,
+        "util": 7145.6,
+        "requeridaWp": 2593.048713738369,
+        "excedente": -1276.6222222222223,
+        "margenPct": -15.157783641160949,
+        "modulosAdicionales": 1,
+        "recuperacion": null
+      },
+      "critico": {
+        "produccion": 8007.999999999999,
+        "util": 6406.4,
+        "requeridaWp": 2892.2466422466423,
+        "excedente": -2015.822222222223,
+        "margenPct": -23.934564643799472,
+        "modulosAdicionales": 2,
+        "recuperacion": null
+      }
+    },
+    "banco": {
+      "bateria": {
+        "id": "tdr-agm",
+        "origen": "tdr",
+        "fabricante": "Referencia TdR (sin fabricante)",
+        "modelo": "AGM declarada 12 V / 200 Ah",
+        "tecnologia": "AGM",
+        "voltaje": 12,
+        "claseNominal": 12,
+        "ah": 200,
+        "dod": 0.5,
+        "eficiencia": 0.8,
+        "cCarga": 0.2,
+        "cDescarga": null,
+        "vida": 4,
+        "fuente": "TdR Reto 03 ESFV 2026-II, seccion 6, pagina 3. Valores ilustrativos, no equipo comercial."
+      },
+      "ecc": 8422.222222222223,
+      "capacidadWh": 33688.88888888889,
+      "capacidadAh": 701.8518518518518,
+      "ns": 4,
+      "np": 4,
+      "numero": 16,
+      "ah": 800,
+      "wh": 38400,
+      "dodDiario": 0.21932870370370372,
+      "dodFinal": 0.43865740740740744,
+      "dodEfectivo": 0.43865740740740744,
+      "iCarga": 45.833333333333336,
+      "iDescarga": 21.064814814814813,
+      "cCarga": 0.05729166666666667,
+      "cDescarga": 0.026331018518518517,
+      "nominalPorAnio": 9600
+    },
+    "equipos": [
+      {
+        "equipo": {
+          "id": "ctrl-a",
+          "origen": "tdr",
+          "rama": "con",
+          "tipo": "regulador",
+          "fabricante": "Referencia TdR",
+          "modelo": "CTRL-A",
+          "vMax": 150,
+          "mpptMin": null,
+          "mpptMax": 150,
+          "startOffset": 5,
+          "impMax": null,
+          "iscMax": 50,
+          "outMax": 60,
+          "mppts": 1,
+          "fuente": "TdR Reto 03 ESFV 2026-II, pagina 3",
+          "nota": "TdR no declara ventana independiente: se usa Vbat+5 a Vmax como envolvente de calculo, requiere ficha para diseno real."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 200.673,
+            "limite": 150,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 148.87876,
+            "limite": 53,
+            "cumple": true,
+            "unidad": "V",
+            "nota": "Limite derivado: Vbanco + 5 V (metodo TdR)."
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 168.241,
+            "limite": 150,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 148.87876,
+            "limite": 53,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Margen sobre banco (Vbat + 5 V)",
+            "valor": 148.87876,
+            "limite": 53,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 14,
+            "limite": 50,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": null,
+            "cumple": null,
+            "unidad": "A",
+            "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+          },
+          {
+            "nombre": "Salida al banco (sin 1,25)",
+            "valor": 45.833333333333336,
+            "limite": 60,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          }
+        ],
+        "fallos": [
+          {
+            "nombre": "Voc frio",
+            "valor": 200.673,
+            "limite": 150,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 168.241,
+            "limite": 150,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          }
+        ],
+        "pendientes": [
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": null,
+            "cumple": null,
+            "unidad": "A",
+            "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+          }
+        ],
+        "avisos": [
+          "Este equipo es un regulador CC: falta seleccionar el inversor CA independiente para las cargas.",
+          "TdR no declara ventana independiente: se usa Vbat+5 a Vmax como envolvente de calculo, requiere ficha para diseno real."
+        ],
+        "ratio": null,
+        "distribucion": [
+          1
+        ],
+        "nsMax": 2,
+        "voc": 200.673,
+        "caliente": 148.87876,
+        "frio": 168.241,
+        "imp": 13.3,
+        "isc": 14,
+        "salida": 45.833333333333336,
+        "estado": "No cumple",
+        "cumple": false,
+        "alternativas": [
+          {
+            "ns": 2,
+            "np": 2,
+            "estado": "Alerta"
+          }
+        ]
+      },
+      {
+        "equipo": {
+          "id": "ctrl-b",
+          "origen": "tdr",
+          "rama": "con",
+          "tipo": "regulador",
+          "fabricante": "Referencia TdR",
+          "modelo": "CTRL-B",
+          "vMax": 250,
+          "mpptMin": null,
+          "mpptMax": 250,
+          "startOffset": 5,
+          "impMax": null,
+          "iscMax": 50,
+          "outMax": 80,
+          "mppts": 1,
+          "fuente": "TdR Reto 03 ESFV 2026-II, pagina 3",
+          "nota": "Ventana derivada Vbat+5 a Vmax; Imp no declarado. Sin fabricante real."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 200.673,
+            "limite": 250,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 148.87876,
+            "limite": 53,
+            "cumple": true,
+            "unidad": "V",
+            "nota": "Limite derivado: Vbanco + 5 V (metodo TdR)."
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 168.241,
+            "limite": 250,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 148.87876,
+            "limite": 53,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Margen sobre banco (Vbat + 5 V)",
+            "valor": 148.87876,
+            "limite": 53,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 14,
+            "limite": 50,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": null,
+            "cumple": null,
+            "unidad": "A",
+            "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+          },
+          {
+            "nombre": "Salida al banco (sin 1,25)",
+            "valor": 45.833333333333336,
+            "limite": 80,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          }
+        ],
+        "fallos": [],
+        "pendientes": [
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": null,
+            "cumple": null,
+            "unidad": "A",
+            "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+          }
+        ],
+        "avisos": [
+          "Este equipo es un regulador CC: falta seleccionar el inversor CA independiente para las cargas.",
+          "Ventana derivada Vbat+5 a Vmax; Imp no declarado. Sin fabricante real."
+        ],
+        "ratio": null,
+        "distribucion": [
+          1
+        ],
+        "nsMax": 4,
+        "voc": 200.673,
+        "caliente": 148.87876,
+        "frio": 168.241,
+        "imp": 13.3,
+        "isc": 14,
+        "salida": 45.833333333333336,
+        "estado": "Alerta",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "ctrl-c",
+          "origen": "tdr",
+          "rama": "con",
+          "tipo": "regulador",
+          "fabricante": "Referencia TdR",
+          "modelo": "CTRL-C",
+          "vMax": 250,
+          "mpptMin": null,
+          "mpptMax": 250,
+          "startOffset": 5,
+          "impMax": null,
+          "iscMax": 50,
+          "outMax": 40,
+          "mppts": 1,
+          "fuente": "TdR Reto 03 ESFV 2026-II, pagina 3",
+          "nota": "Ventana derivada Vbat+5 a Vmax; Imp no declarado. Sin fabricante real."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 200.673,
+            "limite": 250,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 148.87876,
+            "limite": 53,
+            "cumple": true,
+            "unidad": "V",
+            "nota": "Limite derivado: Vbanco + 5 V (metodo TdR)."
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 168.241,
+            "limite": 250,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 148.87876,
+            "limite": 53,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Margen sobre banco (Vbat + 5 V)",
+            "valor": 148.87876,
+            "limite": 53,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 14,
+            "limite": 50,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": null,
+            "cumple": null,
+            "unidad": "A",
+            "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+          },
+          {
+            "nombre": "Salida al banco (sin 1,25)",
+            "valor": 45.833333333333336,
+            "limite": 40,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          }
+        ],
+        "fallos": [
+          {
+            "nombre": "Salida al banco (sin 1,25)",
+            "valor": 45.833333333333336,
+            "limite": 40,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          }
+        ],
+        "pendientes": [
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": null,
+            "cumple": null,
+            "unidad": "A",
+            "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+          }
+        ],
+        "avisos": [
+          "Este equipo es un regulador CC: falta seleccionar el inversor CA independiente para las cargas.",
+          "Ventana derivada Vbat+5 a Vmax; Imp no declarado. Sin fabricante real."
+        ],
+        "ratio": null,
+        "distribucion": [
+          1
+        ],
+        "nsMax": 4,
+        "voc": 200.673,
+        "caliente": 148.87876,
+        "frio": 168.241,
+        "imp": 13.3,
+        "isc": 14,
+        "salida": 45.833333333333336,
+        "estado": "No cumple",
+        "cumple": false,
+        "alternativas": []
+      }
+    ],
+    "seleccionado": {
+      "equipo": {
+        "id": "ctrl-b",
+        "origen": "tdr",
+        "rama": "con",
+        "tipo": "regulador",
+        "fabricante": "Referencia TdR",
+        "modelo": "CTRL-B",
+        "vMax": 250,
+        "mpptMin": null,
+        "mpptMax": 250,
+        "startOffset": 5,
+        "impMax": null,
+        "iscMax": 50,
+        "outMax": 80,
+        "mppts": 1,
+        "fuente": "TdR Reto 03 ESFV 2026-II, pagina 3",
+        "nota": "Ventana derivada Vbat+5 a Vmax; Imp no declarado. Sin fabricante real."
+      },
+      "criterios": [
+        {
+          "nombre": "Voc frio",
+          "valor": 200.673,
+          "limite": 250,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Vmp caliente / MPPT minimo",
+          "valor": 148.87876,
+          "limite": 53,
+          "cumple": true,
+          "unidad": "V",
+          "nota": "Limite derivado: Vbanco + 5 V (metodo TdR)."
+        },
+        {
+          "nombre": "Vmp frio / MPPT maximo",
+          "valor": 168.241,
+          "limite": 250,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Arranque (Vmp caliente conservador)",
+          "valor": 148.87876,
+          "limite": 53,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Margen sobre banco (Vbat + 5 V)",
+          "valor": 148.87876,
+          "limite": 53,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Isc por MPPT",
+          "valor": 14,
+          "limite": 50,
+          "cumple": true,
+          "unidad": "A",
+          "nota": ""
+        },
+        {
+          "nombre": "Imp por MPPT",
+          "valor": 13.3,
+          "limite": null,
+          "cumple": null,
+          "unidad": "A",
+          "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+        },
+        {
+          "nombre": "Salida al banco (sin 1,25)",
+          "valor": 45.833333333333336,
+          "limite": 80,
+          "cumple": true,
+          "unidad": "A",
+          "nota": ""
+        }
+      ],
+      "fallos": [],
+      "pendientes": [
+        {
+          "nombre": "Imp por MPPT",
+          "valor": 13.3,
+          "limite": null,
+          "cumple": null,
+          "unidad": "A",
+          "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+        }
+      ],
+      "avisos": [
+        "Este equipo es un regulador CC: falta seleccionar el inversor CA independiente para las cargas.",
+        "Ventana derivada Vbat+5 a Vmax; Imp no declarado. Sin fabricante real."
+      ],
+      "ratio": null,
+      "distribucion": [
+        1
+      ],
+      "nsMax": 4,
+      "voc": 200.673,
+      "caliente": 148.87876,
+      "frio": 168.241,
+      "imp": 13.3,
+      "isc": 14,
+      "salida": 45.833333333333336,
+      "estado": "Alerta",
+      "cumple": false,
+      "alternativas": []
+    },
+    "avisos": [
+      "Tasa C de descarga pendiente: el catalogo no declara limite continuo.",
+      "El banco no se recupera con este generador en el promedio anual.",
+      "El banco no se recupera con este generador en el mes critico."
+    ],
+    "tecnologias": [
+      {
+        "bateria": {
+          "id": "tdr-agm",
+          "origen": "tdr",
+          "fabricante": "Referencia TdR (sin fabricante)",
+          "modelo": "AGM declarada 12 V / 200 Ah",
+          "tecnologia": "AGM",
+          "voltaje": 12,
+          "claseNominal": 12,
+          "ah": 200,
+          "dod": 0.5,
+          "eficiencia": 0.8,
+          "cCarga": 0.2,
+          "cDescarga": null,
+          "vida": 4,
+          "fuente": "TdR Reto 03 ESFV 2026-II, seccion 6, pagina 3. Valores ilustrativos, no equipo comercial."
+        },
+        "ecc": 8422.222222222223,
+        "capacidadWh": 33688.88888888889,
+        "capacidadAh": 701.8518518518518,
+        "ns": 4,
+        "np": 4,
+        "numero": 16,
+        "ah": 800,
+        "wh": 38400,
+        "dodDiario": 0.21932870370370372,
+        "dodFinal": 0.43865740740740744,
+        "dodEfectivo": 0.43865740740740744,
+        "iCarga": 45.833333333333336,
+        "iDescarga": 21.064814814814813,
+        "cCarga": 0.05729166666666667,
+        "cDescarga": 0.026331018518518517,
+        "nominalPorAnio": 9600
+      },
+      {
+        "bateria": {
+          "id": "tdr-lfp",
+          "origen": "tdr",
+          "fabricante": "Referencia TdR (sin fabricante)",
+          "modelo": "LFP declarada 51,2 V / 100 Ah",
+          "tecnologia": "LFP",
+          "voltaje": 51.2,
+          "claseNominal": 48,
+          "ah": 100,
+          "dod": 0.8,
+          "eficiencia": 0.92,
+          "cCarga": 0.5,
+          "cDescarga": null,
+          "vida": 10,
+          "maxSerie": 1,
+          "fuente": "TdR Reto 03 ESFV 2026-II, seccion 6, pagina 3. Valores ilustrativos, no equipo comercial."
+        },
+        "ecc": 8422.222222222223,
+        "capacidadWh": 21055.555555555555,
+        "capacidadAh": 411.2413194444444,
+        "ns": 1,
+        "np": 5,
+        "numero": 5,
+        "ah": 500,
+        "wh": 25600,
+        "dodDiario": 0.3289930555555556,
+        "dodFinal": 0.6579861111111112,
+        "dodEfectivo": 0.6579861111111112,
+        "iCarga": 45.833333333333336,
+        "iDescarga": 19.748263888888886,
+        "cCarga": 0.09166666666666667,
+        "cDescarga": 0.03949652777777777,
+        "nominalPorAnio": 2560
+      }
+    ],
+    "modulosAgregados": 0,
+    "conductor": {
+      "isc": 14,
+      "diseno": 17.5
+    }
+  }
+}

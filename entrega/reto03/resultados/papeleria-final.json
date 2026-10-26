@@ -1,0 +1,1235 @@
+{
+  "proyecto": {
+    "nombre": "Papelería con servicio de copiado",
+    "fecha": "2026-10-25",
+    "integrantes": "Nicolas Paz Mejia",
+    "tipoApp": "On-grid",
+    "diasMes": 30,
+    "cu": 1000,
+    "notas": "CASO DEL DOCENTE: 30 m2 obligatorios. Sistema on-grid sin baterias, limitado al espacio disponible. Equipos electricamente compatibles; la produccion solar es parcial y la red debe cubrir el deficit. No hay autonomia sin red."
+  },
+  "resultados": {
+    "perfil": [
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      2270,
+      1150,
+      3150,
+      3150,
+      2550,
+      2070,
+      2670,
+      2550,
+      3150,
+      2550,
+      1150,
+      670,
+      60,
+      60,
+      60,
+      60,
+      60
+    ],
+    "pMax": 3150,
+    "horaPico": 9,
+    "energiaDia": 27.8,
+    "pInst": 4750,
+    "energiaMes": 834,
+    "costoMes": 834000
+  },
+  "h": {
+    "edWh": 27800,
+    "perfil": [
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      60,
+      2270,
+      1150,
+      3150,
+      3150,
+      2550,
+      2070,
+      2670,
+      2550,
+      3150,
+      2550,
+      1150,
+      670,
+      60,
+      60,
+      60,
+      60,
+      60
+    ],
+    "pMax": 3150,
+    "horaPico": 9,
+    "dentroWh": 26470,
+    "fueraWh": 1330,
+    "tipoApp": "On-grid",
+    "diasMes": 30,
+    "potenciaWp": 7000,
+    "ns": 14,
+    "np": 1,
+    "modulo": {
+      "id": "longi500",
+      "origen": "comercial",
+      "fabricante": "LONGi Solar",
+      "modelo": "Hi-MO X10 LR7-54HVH-500M Anti-Glare",
+      "potencia": 500,
+      "voc": 40.75,
+      "isc": 15.53,
+      "vmp": 33.73,
+      "imp": 14.83,
+      "beta": -0.2,
+      "alpha": 0.05,
+      "gamma": -0.26,
+      "noct": 45,
+      "celdas": 108,
+      "area": 2.0412,
+      "eficiencia": 24.5,
+      "dimensionesMm": [
+        1800,
+        1134,
+        30
+      ],
+      "fuente": "https://static.longi.com/LR_7_54_HVH_480_500_M_30_30_and_15_Frame_Anti_Glare_BGV_03_20250813_EN_cced5c1b69.pdf",
+      "revision": "BGV03 20250813, pagina 2, columna LR7-54HVH-500M STC",
+      "fechaConsulta": "2026-10-25",
+      "nota": "Ficha Anti-Glare 480-500M; no mezclar con variante Scientist de otra revision. Superficie geometrica 2.0412 m2; no incorpora pasillos ni separaciones."
+    },
+    "tMin": 24,
+    "tCelda": 65.25,
+    "hspAnual": 4.253694173253957,
+    "hspCritico": 3.949676990907228,
+    "pr": 0.7,
+    "requeridaReto02Wp": 9336.422435820155,
+    "excedenteReto02Pct": -25.02481493185471,
+    "areaGenerador": 28.5768,
+    "areaDisponible": 30,
+    "corrienteDisenoReto02": 24.265625,
+    "limitarPorArea": true,
+    "recursoNombre": "Neiva - coordenadas y recurso guardados",
+    "recursoFuente": "NASA POWER; transposicion local al plano del generador",
+    "errores": []
+  },
+  "config": {
+    "rama": "sin",
+    "catalogo": "comercial",
+    "etaInv": 0.9,
+    "autonomia": 2,
+    "dod": 0.5,
+    "factorTemp": 1,
+    "vBanco": 48,
+    "vNominal": 48,
+    "etaBat": 0.8,
+    "bateriaId": "tdr-agm",
+    "equipoCon": "deye5k",
+    "equipoSin": "goodwe-ms6k",
+    "dcAcMin": 1,
+    "dcAcMax": 1.3,
+    "ajuste": null,
+    "ns": 7
+  },
+  "resultado": {
+    "rama": "sin",
+    "errores": [],
+    "arreglo": {
+      "ns": 7,
+      "np": 2,
+      "nTotal": 14,
+      "potenciaWp": 7000
+    },
+    "balance": {
+      "ecc": 30888.888888888887,
+      "energiaGenerar": 30888.888888888887,
+      "anual": {
+        "produccion": 20843.101448944388,
+        "util": 20843.101448944388,
+        "requeridaWp": 10373.802706466839,
+        "excedente": -10045.787439944499,
+        "margenPct": -32.522333438669236,
+        "modulosAdicionales": 7,
+        "recuperacion": null
+      },
+      "critico": {
+        "produccion": 19353.417255445416,
+        "util": 19353.417255445416,
+        "requeridaWp": 11172.301995472368,
+        "excedente": -11535.47163344347,
+        "margenPct": -37.34505205071626,
+        "modulosAdicionales": 9,
+        "recuperacion": null
+      }
+    },
+    "banco": null,
+    "equipos": [
+      {
+        "equipo": {
+          "id": "solis2k",
+          "origen": "comercial",
+          "rama": "sin",
+          "tipo": "inversor",
+          "fabricante": "Solis (Ginlong)",
+          "modelo": "S6-GR1P2K-M (manual EUR V1.0)",
+          "vMax": 600,
+          "mpptMin": 80,
+          "mpptMax": 500,
+          "startV": 90,
+          "impMax": 14,
+          "iscMax": 22,
+          "mppts": 1,
+          "stringsMax": 1,
+          "pac": 2000,
+          "fuente": "https://www.ginlong.com/uploads/file/Solis_Manual_S6-GR1P%280%2C7-3%2C6%29K-M_EUR_V1%2C0.pdf",
+          "fechaConsulta": "2026-10-23",
+          "nota": "Version 220/230 V 50/60 Hz, manual citado. No mezclar con revision 16 A o variante LV."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 285.8205,
+            "limite": 600,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 217.10314499999998,
+            "limite": 80,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 236.58221999999995,
+            "limite": 500,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 217.10314499999998,
+            "limite": 90,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 31.06,
+            "limite": 22,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 29.66,
+            "limite": 14,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 2,
+            "limite": 1,
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 3.5,
+            "limite": "1-1.3",
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "fallos": [
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 31.06,
+            "limite": 22,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 29.66,
+            "limite": 14,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 2,
+            "limite": 1,
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 3.5,
+            "limite": "1-1.3",
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "pendientes": [],
+        "avisos": [
+          "Recorte posible cuando la potencia CC disponible supera Pac; el cociente no cuantifica perdidas anuales.",
+          "Version 220/230 V 50/60 Hz, manual citado. No mezclar con revision 16 A o variante LV."
+        ],
+        "ratio": 3.5,
+        "distribucion": [
+          2
+        ],
+        "nsMax": 14,
+        "voc": 285.8205,
+        "caliente": 217.10314499999998,
+        "frio": 236.58221999999995,
+        "imp": 29.66,
+        "isc": 31.06,
+        "salida": 145.83333333333334,
+        "estado": "No cumple",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "solis3k",
+          "origen": "comercial",
+          "rama": "sin",
+          "tipo": "inversor",
+          "fabricante": "Solis (Ginlong)",
+          "modelo": "S6-GR1P3K (manual EUR V1.2)",
+          "vMax": 600,
+          "mpptMin": 90,
+          "mpptMax": 520,
+          "startV": 120,
+          "impMax": 14,
+          "iscMax": 22,
+          "mppts": 2,
+          "stringsMax": 1,
+          "pac": 3000,
+          "fuente": "https://www.ginlong.com/uploads/file/Solis_Manual_S6-GR1P%282%2C5-6%29K_FN_EUR_V1%2C2%2820221116%29.pdf",
+          "fechaConsulta": "2026-10-23",
+          "nota": "Version 220/230 V, 50/60 Hz. Compatibilidad de red local debe verificarse por separado."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 285.8205,
+            "limite": 600,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 217.10314499999998,
+            "limite": 90,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 236.58221999999995,
+            "limite": 520,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 217.10314499999998,
+            "limite": 120,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 15.53,
+            "limite": 22,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 14.83,
+            "limite": 14,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 1,
+            "limite": 1,
+            "cumple": true,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 2.3333333333333335,
+            "limite": "1-1.3",
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "fallos": [
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 14.83,
+            "limite": 14,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 2.3333333333333335,
+            "limite": "1-1.3",
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "pendientes": [],
+        "avisos": [
+          "Recorte posible cuando la potencia CC disponible supera Pac; el cociente no cuantifica perdidas anuales.",
+          "Version 220/230 V, 50/60 Hz. Compatibilidad de red local debe verificarse por separado."
+        ],
+        "ratio": 2.3333333333333335,
+        "distribucion": [
+          1,
+          1
+        ],
+        "nsMax": 14,
+        "voc": 285.8205,
+        "caliente": 217.10314499999998,
+        "frio": 236.58221999999995,
+        "imp": 14.83,
+        "isc": 15.53,
+        "salida": 145.83333333333334,
+        "estado": "No cumple",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "goodwe-xs2k",
+          "origen": "comercial",
+          "rama": "sin",
+          "tipo": "inversor",
+          "fabricante": "GoodWe",
+          "modelo": "GW2000-XS-30 (LATAM ES V2.1, 20241011)",
+          "vMax": 600,
+          "mpptMin": 40,
+          "mpptMax": 450,
+          "startV": 50,
+          "impMax": 16,
+          "iscMax": 25,
+          "mppts": 1,
+          "stringsMax": 1,
+          "pac": 2000,
+          "pvMax": 4000,
+          "tipoFuente": "ficha",
+          "revision": "20241011 LATAM-ES V2.1, pagina 2",
+          "fuente": "https://latam.goodwe.com/Ftp/Downloads/Datasheet/LATAM/GW_XS%20PLUS%2B_Datasheet-LATAM_ES.pdf",
+          "fechaConsulta": "2026-10-24",
+          "nota": "Inversor de red XS G3 de 2000 W, 220/230/240 V F-N, 50/60 Hz. La columna GW2000-XS-30 tiene MPPT 40-450 V, distinto del rango 40-550 V de 2500/3000 W. No incluye respaldo con baterias."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 285.8205,
+            "limite": 600,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 217.10314499999998,
+            "limite": 40,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 236.58221999999995,
+            "limite": 450,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 217.10314499999998,
+            "limite": 50,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 31.06,
+            "limite": 25,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 29.66,
+            "limite": 16,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 2,
+            "limite": 1,
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Potencia FV maxima",
+            "valor": 7000,
+            "limite": 4000,
+            "cumple": false,
+            "unidad": "W",
+            "nota": ""
+          },
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 3.5,
+            "limite": "1-1.3",
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "fallos": [
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 31.06,
+            "limite": 25,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 29.66,
+            "limite": 16,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 2,
+            "limite": 1,
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Potencia FV maxima",
+            "valor": 7000,
+            "limite": 4000,
+            "cumple": false,
+            "unidad": "W",
+            "nota": ""
+          },
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 3.5,
+            "limite": "1-1.3",
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "pendientes": [],
+        "avisos": [
+          "Recorte posible cuando la potencia CC disponible supera Pac; el cociente no cuantifica perdidas anuales.",
+          "Inversor de red XS G3 de 2000 W, 220/230/240 V F-N, 50/60 Hz. La columna GW2000-XS-30 tiene MPPT 40-450 V, distinto del rango 40-550 V de 2500/3000 W. No incluye respaldo con baterias."
+        ],
+        "ratio": 3.5,
+        "distribucion": [
+          2
+        ],
+        "nsMax": 14,
+        "voc": 285.8205,
+        "caliente": 217.10314499999998,
+        "frio": 236.58221999999995,
+        "imp": 29.66,
+        "isc": 31.06,
+        "salida": 145.83333333333334,
+        "estado": "No cumple",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "sungrow3k",
+          "origen": "comercial",
+          "rama": "sin",
+          "tipo": "inversor",
+          "fabricante": "Sungrow",
+          "modelo": "SG3.0RS (Global V12, 20220714)",
+          "vMax": 600,
+          "mpptMin": 40,
+          "mpptMax": 560,
+          "startV": 50,
+          "impMax": 16,
+          "iscMax": 20,
+          "mppts": 2,
+          "stringsMax": 1,
+          "pac": 3000,
+          "tipoFuente": "ficha",
+          "revision": "DS 20220714, Version 12, pagina 2",
+          "fuente": "https://info-support.sungrowpower.com/application/pdf/2023/07/22/DS_20220714_SG3.0_3.6_4.0RS_Datasheet_V12_EN%28GL%29.pdf",
+          "fechaConsulta": "2026-10-24",
+          "nota": "Inversor de red monofasico de 3000 W, 220/230/240 V, 50/60 Hz. 32 A de entrada y 40 A de cortocircuito totales corresponden a 16 A y 20 A por cada MPPT. Arreglo recomendado hasta 4500 Wp; no es un limite absoluto pvMax. No incluye respaldo con baterias y no es la variante SG3.0RS-L."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 285.8205,
+            "limite": 600,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 217.10314499999998,
+            "limite": 40,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 236.58221999999995,
+            "limite": 560,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 217.10314499999998,
+            "limite": 50,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 15.53,
+            "limite": 20,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 14.83,
+            "limite": 16,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 1,
+            "limite": 1,
+            "cumple": true,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 2.3333333333333335,
+            "limite": "1-1.3",
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "fallos": [
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 2.3333333333333335,
+            "limite": "1-1.3",
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "pendientes": [],
+        "avisos": [
+          "Recorte posible cuando la potencia CC disponible supera Pac; el cociente no cuantifica perdidas anuales.",
+          "Inversor de red monofasico de 3000 W, 220/230/240 V, 50/60 Hz. 32 A de entrada y 40 A de cortocircuito totales corresponden a 16 A y 20 A por cada MPPT. Arreglo recomendado hasta 4500 Wp; no es un limite absoluto pvMax. No incluye respaldo con baterias y no es la variante SG3.0RS-L."
+        ],
+        "ratio": 2.3333333333333335,
+        "distribucion": [
+          1,
+          1
+        ],
+        "nsMax": 14,
+        "voc": 285.8205,
+        "caliente": 217.10314499999998,
+        "frio": 236.58221999999995,
+        "imp": 14.83,
+        "isc": 15.53,
+        "salida": 145.83333333333334,
+        "estado": "No cumple",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "goodwe-ms5k",
+          "origen": "comercial",
+          "rama": "sin",
+          "tipo": "inversor",
+          "fabricante": "GoodWe",
+          "modelo": "GW5000-MS-30 (LATAM ES V2.1, 20250910)",
+          "vMax": 600,
+          "mpptMin": 40,
+          "mpptMax": 560,
+          "startV": 50,
+          "impMax": 20,
+          "iscMax": 25,
+          "mppts": 3,
+          "stringsMax": 1,
+          "pac": 5000,
+          "pvMax": 7750,
+          "tipoFuente": "ficha",
+          "revision": "20250910 LATAM-ES V2.1, pagina 2, columna GW5000-MS-30",
+          "fuente": "https://latam.goodwe.com/Ftp/Downloads/Datasheet/LATAM/GW_MS%20G3_Datasheet-LATAM_ES.pdf",
+          "fechaConsulta": "2026-10-25",
+          "nota": "Inversor monofasico de red de 5000 W, 220/230/240 V, 50/60 Hz. Tres MPPT independientes, 20 A de trabajo y 25 A de cortocircuito por MPPT, una cadena por MPPT. No ofrece respaldo sin red. Confirmar tension y conexion de la red del local. Limites de entrada de la columna LATAM; la ficha contiene variantes regulatorias para Brasil/Chile que no se mezclan aqui."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 285.8205,
+            "limite": 600,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 217.10314499999998,
+            "limite": 40,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 236.58221999999995,
+            "limite": 560,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 217.10314499999998,
+            "limite": 50,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 15.53,
+            "limite": 25,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 14.83,
+            "limite": 20,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 1,
+            "limite": 1,
+            "cumple": true,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Potencia FV maxima",
+            "valor": 7000,
+            "limite": 7750,
+            "cumple": true,
+            "unidad": "W",
+            "nota": ""
+          },
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 1.4,
+            "limite": "1-1.3",
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "fallos": [
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 1.4,
+            "limite": "1-1.3",
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "pendientes": [],
+        "avisos": [
+          "Recorte posible cuando la potencia CC disponible supera Pac; el cociente no cuantifica perdidas anuales.",
+          "Inversor monofasico de red de 5000 W, 220/230/240 V, 50/60 Hz. Tres MPPT independientes, 20 A de trabajo y 25 A de cortocircuito por MPPT, una cadena por MPPT. No ofrece respaldo sin red. Confirmar tension y conexion de la red del local. Limites de entrada de la columna LATAM; la ficha contiene variantes regulatorias para Brasil/Chile que no se mezclan aqui."
+        ],
+        "ratio": 1.4,
+        "distribucion": [
+          1,
+          1,
+          0
+        ],
+        "nsMax": 14,
+        "voc": 285.8205,
+        "caliente": 217.10314499999998,
+        "frio": 236.58221999999995,
+        "imp": 14.83,
+        "isc": 15.53,
+        "salida": 145.83333333333334,
+        "estado": "No cumple",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "goodwe-ms10k",
+          "origen": "comercial",
+          "rama": "sin",
+          "tipo": "inversor",
+          "fabricante": "GoodWe",
+          "modelo": "GW10K-MS-30 (LATAM ES V2.1, 20250910)",
+          "vMax": 600,
+          "mpptMin": 40,
+          "mpptMax": 560,
+          "startV": 50,
+          "impMax": 20,
+          "iscMax": 25,
+          "mppts": 3,
+          "stringsMax": 1,
+          "pac": 10000,
+          "pvMax": 15500,
+          "tipoFuente": "ficha",
+          "revision": "20250910 LATAM-ES V2.1, pagina 2, columna GW10K-MS-30",
+          "fuente": "https://latam.goodwe.com/Ftp/Downloads/Datasheet/LATAM/GW_MS%20G3_Datasheet-LATAM_ES.pdf",
+          "fechaConsulta": "2026-10-25",
+          "nota": "Inversor monofasico de red de 10000 W, 220/230/240 V, 50/60 Hz. Tres MPPT independientes, 20 A de trabajo y 25 A de cortocircuito por MPPT, una cadena por MPPT. No ofrece respaldo sin red. Confirmar tension y conexion de la red del local. Limites de entrada de la columna LATAM; la ficha contiene variantes regulatorias para Brasil/Chile que no se mezclan aqui."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 285.8205,
+            "limite": 600,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 217.10314499999998,
+            "limite": 40,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 236.58221999999995,
+            "limite": 560,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 217.10314499999998,
+            "limite": 50,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 15.53,
+            "limite": 25,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 14.83,
+            "limite": 20,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 1,
+            "limite": 1,
+            "cumple": true,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Potencia FV maxima",
+            "valor": 7000,
+            "limite": 15500,
+            "cumple": true,
+            "unidad": "W",
+            "nota": ""
+          },
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 0.7,
+            "limite": "1-1.3",
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "fallos": [
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 0.7,
+            "limite": "1-1.3",
+            "cumple": false,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "pendientes": [],
+        "avisos": [
+          "Inversor sobredimensionado frente al rango DC/AC configurado.",
+          "Inversor monofasico de red de 10000 W, 220/230/240 V, 50/60 Hz. Tres MPPT independientes, 20 A de trabajo y 25 A de cortocircuito por MPPT, una cadena por MPPT. No ofrece respaldo sin red. Confirmar tension y conexion de la red del local. Limites de entrada de la columna LATAM; la ficha contiene variantes regulatorias para Brasil/Chile que no se mezclan aqui."
+        ],
+        "ratio": 0.7,
+        "distribucion": [
+          1,
+          1,
+          0
+        ],
+        "nsMax": 14,
+        "voc": 285.8205,
+        "caliente": 217.10314499999998,
+        "frio": 236.58221999999995,
+        "imp": 14.83,
+        "isc": 15.53,
+        "salida": 145.83333333333334,
+        "estado": "No cumple",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "goodwe-ms6k",
+          "origen": "comercial",
+          "rama": "sin",
+          "tipo": "inversor",
+          "fabricante": "GoodWe",
+          "modelo": "GW6000-MS-30 (LATAM ES V2.1, 20250910)",
+          "vMax": 600,
+          "mpptMin": 40,
+          "mpptMax": 560,
+          "startV": 50,
+          "impMax": 20,
+          "iscMax": 25,
+          "mppts": 3,
+          "stringsMax": 1,
+          "pac": 6000,
+          "pvMax": 9300,
+          "tipoFuente": "ficha",
+          "revision": "20250910 LATAM-ES V2.1, pagina 2, columna GW6000-MS-30",
+          "fuente": "https://latam.goodwe.com/Ftp/Downloads/Datasheet/LATAM/GW_MS%20G3_Datasheet-LATAM_ES.pdf",
+          "fechaConsulta": "2026-10-25",
+          "nota": "Inversor monofasico de red de 6000 W, 220/230/240 V, 50/60 Hz. Tres MPPT independientes de 20 A de trabajo y 25 A de cortocircuito; una cadena por MPPT. No ofrece respaldo sin red. Verificar la conexion AC del local. Limites de la ficha LATAM, sin mezclar variantes regionales."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 285.8205,
+            "limite": 600,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 217.10314499999998,
+            "limite": 40,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 236.58221999999995,
+            "limite": 560,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 217.10314499999998,
+            "limite": 50,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 15.53,
+            "limite": 25,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 14.83,
+            "limite": 20,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 1,
+            "limite": 1,
+            "cumple": true,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Potencia FV maxima",
+            "valor": 7000,
+            "limite": 9300,
+            "cumple": true,
+            "unidad": "W",
+            "nota": ""
+          },
+          {
+            "nombre": "Relacion DC/AC",
+            "valor": 1.1666666666666667,
+            "limite": "1-1.3",
+            "cumple": true,
+            "unidad": "",
+            "nota": ""
+          }
+        ],
+        "fallos": [],
+        "pendientes": [],
+        "avisos": [
+          "Recorte posible cuando la potencia CC disponible supera Pac; el cociente no cuantifica perdidas anuales.",
+          "Inversor monofasico de red de 6000 W, 220/230/240 V, 50/60 Hz. Tres MPPT independientes de 20 A de trabajo y 25 A de cortocircuito; una cadena por MPPT. No ofrece respaldo sin red. Verificar la conexion AC del local. Limites de la ficha LATAM, sin mezclar variantes regionales."
+        ],
+        "ratio": 1.1666666666666667,
+        "distribucion": [
+          1,
+          1,
+          0
+        ],
+        "nsMax": 14,
+        "voc": 285.8205,
+        "caliente": 217.10314499999998,
+        "frio": 236.58221999999995,
+        "imp": 14.83,
+        "isc": 15.53,
+        "salida": 145.83333333333334,
+        "estado": "Cumple",
+        "cumple": true,
+        "alternativas": []
+      }
+    ],
+    "seleccionado": {
+      "equipo": {
+        "id": "goodwe-ms6k",
+        "origen": "comercial",
+        "rama": "sin",
+        "tipo": "inversor",
+        "fabricante": "GoodWe",
+        "modelo": "GW6000-MS-30 (LATAM ES V2.1, 20250910)",
+        "vMax": 600,
+        "mpptMin": 40,
+        "mpptMax": 560,
+        "startV": 50,
+        "impMax": 20,
+        "iscMax": 25,
+        "mppts": 3,
+        "stringsMax": 1,
+        "pac": 6000,
+        "pvMax": 9300,
+        "tipoFuente": "ficha",
+        "revision": "20250910 LATAM-ES V2.1, pagina 2, columna GW6000-MS-30",
+        "fuente": "https://latam.goodwe.com/Ftp/Downloads/Datasheet/LATAM/GW_MS%20G3_Datasheet-LATAM_ES.pdf",
+        "fechaConsulta": "2026-10-25",
+        "nota": "Inversor monofasico de red de 6000 W, 220/230/240 V, 50/60 Hz. Tres MPPT independientes de 20 A de trabajo y 25 A de cortocircuito; una cadena por MPPT. No ofrece respaldo sin red. Verificar la conexion AC del local. Limites de la ficha LATAM, sin mezclar variantes regionales."
+      },
+      "criterios": [
+        {
+          "nombre": "Voc frio",
+          "valor": 285.8205,
+          "limite": 600,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Vmp caliente / MPPT minimo",
+          "valor": 217.10314499999998,
+          "limite": 40,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Vmp frio / MPPT maximo",
+          "valor": 236.58221999999995,
+          "limite": 560,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Arranque (Vmp caliente conservador)",
+          "valor": 217.10314499999998,
+          "limite": 50,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Isc por MPPT",
+          "valor": 15.53,
+          "limite": 25,
+          "cumple": true,
+          "unidad": "A",
+          "nota": ""
+        },
+        {
+          "nombre": "Imp por MPPT",
+          "valor": 14.83,
+          "limite": 20,
+          "cumple": true,
+          "unidad": "A",
+          "nota": ""
+        },
+        {
+          "nombre": "Cadenas por MPPT",
+          "valor": 1,
+          "limite": 1,
+          "cumple": true,
+          "unidad": "",
+          "nota": ""
+        },
+        {
+          "nombre": "Potencia FV maxima",
+          "valor": 7000,
+          "limite": 9300,
+          "cumple": true,
+          "unidad": "W",
+          "nota": ""
+        },
+        {
+          "nombre": "Relacion DC/AC",
+          "valor": 1.1666666666666667,
+          "limite": "1-1.3",
+          "cumple": true,
+          "unidad": "",
+          "nota": ""
+        }
+      ],
+      "fallos": [],
+      "pendientes": [],
+      "avisos": [
+        "Recorte posible cuando la potencia CC disponible supera Pac; el cociente no cuantifica perdidas anuales.",
+        "Inversor monofasico de red de 6000 W, 220/230/240 V, 50/60 Hz. Tres MPPT independientes de 20 A de trabajo y 25 A de cortocircuito; una cadena por MPPT. No ofrece respaldo sin red. Verificar la conexion AC del local. Limites de la ficha LATAM, sin mezclar variantes regionales."
+      ],
+      "ratio": 1.1666666666666667,
+      "distribucion": [
+        1,
+        1,
+        0
+      ],
+      "nsMax": 14,
+      "voc": 285.8205,
+      "caliente": 217.10314499999998,
+      "frio": 236.58221999999995,
+      "imp": 14.83,
+      "isc": 15.53,
+      "salida": 145.83333333333334,
+      "estado": "Cumple",
+      "cumple": true,
+      "alternativas": []
+    },
+    "avisos": [
+      "La superficie obligatoria limita la generacion: la energia solar no cubre todo el consumo. La red debe aportar el deficit; no hay cobertura solar del 100 %."
+    ],
+    "tecnologias": [],
+    "modulosAgregados": 0,
+    "conductor": {
+      "isc": 31.06,
+      "diseno": 38.824999999999996
+    }
+  }
+}

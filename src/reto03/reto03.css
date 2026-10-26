@@ -1,0 +1,88 @@
+.reto03 { font-size:14px; line-height:1.6; color:#233446; }
+.reto03 section { padding:25px; margin:22px 0; background:#fff; border:1px solid #e0e6ec; border-radius:16px; }
+.r3-heading,.r3-section-heading { display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap; }
+.reto03 h2 { color:#142638; margin:6px 0; font-size:32px; line-height:1.2; letter-spacing:-1px; }
+.reto03 h3 { margin:0 0 5px; font-size:18px; line-height:1.4; color:#142638; }
+.reto03 h4 { font-size:16px; margin:12px 0 6px; line-height:1.4; }
+.reto03 p { margin:9px 0; }
+.r3-heading p,.r3-section-heading p,.r3-step-title p { color:#607081; margin:4px 0; }
+.r3-eyebrow { color:#876010; font-weight:800; font-size:11px; letter-spacing:1.6px; }
+.r3-step-title { display:flex; gap:12px; align-items:flex-start; margin-bottom:20px; }
+.r3-step-title > span { background:#fff0ce; color:#876010; width:32px; height:32px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border-radius:10px; font-weight:800; }
+.r3-fields,.r3-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(215px,100%),1fr)); gap:16px; margin:18px 0; }
+.r3-metric { padding:16px 18px; background:#f5f8fb; border-radius:12px; min-width:0; }
+.r3-metric span,.r3-metric small { display:block; color:#607081; font-size:12px; }
+.r3-metric strong { display:block; font-size:23px; line-height:1.4; color:#182e43; margin:5px 0; letter-spacing:-.4px; overflow-wrap:anywhere; }
+.r3-field { display:flex; flex-direction:column; font-size:13px; font-weight:650; gap:7px; min-width:0; }
+.r3-field small { color:#607081; font-size:12px; font-weight:400; }
+.reto03 input,.reto03 select,.reto03 textarea { box-sizing:border-box; width:100%; min-width:0; border:1px solid #bdc9d4; border-radius:9px; padding:11px 12px; background:#fff; color:#233446; font:inherit; }
+.reto03 textarea { font-family:monospace; font-size:12px; }
+.reto03 button { border:1px solid #cbd6df; background:#fff; color:#213c54; border-radius:9px; padding:10px 13px; cursor:pointer; font:inherit; font-size:13px; font-weight:650; line-height:1.4; display:inline-flex; justify-content:center; align-items:center; gap:7px; }
+.reto03 button:hover { background:#eef4f8; }
+.reto03 .r3-primary { background:#183d4b; color:#fff; border-color:#183d4b; }
+.reto03 .r3-primary:hover { background:#245464; }
+.reto03 .r3-primary:disabled { background:#edf3f2; color:#56736d; border-color:#e1ebe9; opacity:1; cursor:default; }
+.reto03 .r3-selection { background:#eaf4f1; color:#1c6051; border-color:#9bc7ba; }
+.reto03 :focus-visible { outline:3px solid #c88e17; outline-offset:3px; }
+.r3-actions { display:flex; flex-wrap:wrap; align-items:center; gap:9px; margin:12px 0; }
+.r3-scroll { overflow:auto; margin:16px 0; max-width:100%; }
+.reto03 table { border-collapse:collapse; width:100%; min-width:570px; font-size:12px; }
+.reto03 th { background:#edf3f6; color:#273f53; font-weight:700; }
+.reto03 th,.reto03 td { padding:10px 11px; border-bottom:1px solid #e1e7ef; text-align:left; vertical-align:top; }
+.reto03 tr:nth-child(even) td { background:#f8fafc; }
+.reto03 td small { display:block; max-width:280px; color:#637486; margin-top:4px; }
+.r3-equipment-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr)); gap:16px; }
+.r3-equipo { border:1px solid #dce4eb; border-radius:12px; padding:19px; min-width:0; }
+.r3-equipo.selected { border-color:#568d81; box-shadow:0 0 0 1px #568d81; }
+.r3-equipo-head { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; font-size:11px; font-weight:700; color:#66778b; }
+.reto03 .r3-equipo-kind { color:#697789; font-size:12px; margin-bottom:16px; }
+.r3-source-link { display:block; width:fit-content; max-width:100%; margin:0 0 16px; font-size:13px; }
+.r3-device-issues { font-size:13px; padding-left:18px; color:#8b3d2f; margin:14px 0; }
+.r3-device-issues li { margin:5px 0; }
+.reto03 summary { cursor:pointer; font-size:13px; font-weight:650; color:#3f596d; }
+.r3-details { margin-top:18px; padding-top:15px; border-top:1px solid #e7ecf0; }
+.r3-details summary svg,.r3-tools summary svg { vertical-align:middle; margin-right:5px; }
+.r3-details[open] > summary { margin-bottom:18px; }
+.r3-badge { padding:4px 8px; border-radius:6px; font-size:11px; font-weight:750; white-space:nowrap; }
+.r3-badge.ok { background:#e1f3ea; color:#226b4e; }
+.r3-badge.warn { background:#fff1cc; color:#795710; }
+.r3-badge.bad { background:#fbe9e4; color:#973f2f; }
+.reto03 .r3-note { background:#fff7e5; color:#735827; padding:12px; border-radius:9px; font-size:12px; }
+.reto03 .r3-error { background:#fff0eb; color:#963d28; padding:20px; border-radius:12px; }
+.r3-fail { color:#a6412d; font-weight:650; }
+.r3-profile { display:grid; grid-template-columns:repeat(auto-fit,minmax(65px,1fr)); gap:6px; margin:15px 0; }
+.r3-profile span { background:#f1f5f8; border-radius:6px; padding:8px; font-size:11px; }
+.r3-profile strong { display:block; }
+.r3-result-banner { display:flex; align-items:flex-start; gap:13px; padding:18px; border-radius:12px; margin-bottom:18px; }
+.r3-result-banner svg { flex-shrink:0; margin-top:3px; }
+.r3-result-banner p { margin-bottom:0; font-size:13px; }
+.r3-result-banner.needs-work { background:#fff4dd; color:#79561a; }
+.r3-result-banner.enough { background:#eaf5ee; color:#266643; }
+.r3-balance-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.r3-balance-card { border:1px solid #dee6ed; border-radius:12px; padding:20px; }
+.r3-balance-card > span { font-size:12px; color:#627486; font-weight:650; }
+.r3-balance-card h4 { font-size:27px; letter-spacing:-.6px; }
+.r3-balance-card > p { color:#647587; font-size:12px; margin-bottom:20px; }
+.r3-balance-card dl { font-size:12px; }
+.r3-balance-card dl > div { display:flex; justify-content:space-between; gap:15px; padding:8px 0; border-top:1px solid #edf1f4; }
+.r3-balance-card dt { color:#617386; }
+.r3-balance-card dd { text-align:right; margin:0; font-weight:700; }
+.r3-balance-card button { width:100%; margin-top:12px; }
+.r3-adjustment { padding:13px 0; }
+.r3-final-status { display:flex; gap:9px; align-items:center; margin:12px 0; }
+.r3-review ul { padding-left:20px; }
+.r3-review li { margin:10px 0; }
+.r3-tools { margin:22px 0; border:1px dashed #c6d2dc; padding:18px 22px; border-radius:12px; }
+.r3-tools-body { padding-top:12px; }
+.reto03 .r3-welcome { padding:48px 32px; max-width:800px; margin:30px auto; }
+.r3-welcome > p { max-width:550px; color:#637486; }
+.r3-welcome h3 { font-size:25px; margin-top:18px; letter-spacing:-.5px; }
+.r3-welcome > small { color:#6a7c8b; }
+.r3-welcome-icon { color:#8c6416; background:#fff0cb; width:72px; height:72px; border-radius:20px; display:flex; align-items:center; justify-content:center; }
+@media(max-width:700px) {
+  .reto03 section { padding:18px; margin:16px 0; }
+  .r3-heading h2 { font-size:27px; }
+  .r3-metric strong { font-size:21px; }
+  .r3-balance-grid,.r3-equipment-grid { grid-template-columns:1fr; }
+  .r3-fields,.r3-metrics { gap:12px; }
+}

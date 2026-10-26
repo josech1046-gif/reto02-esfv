@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Guía técnica · Reto 03 ESFV</title>
+<style>body{font:16px/1.7 system-ui,sans-serif;color:#233446;background:#f1f5f8;margin:0}main{max-width:880px;margin:30px auto;padding:28px;background:white;border-radius:16px}h1{line-height:1.2;color:#173d4e}h2{font-size:21px;margin-top:32px}a{color:#25657a}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:12px;border-bottom:1px solid #dce5ec}pre{padding:18px;background:#f1f5f8;overflow:auto;font-size:13px;border-radius:10px}.scroll{overflow:auto}@media(max-width:600px){main{margin:12px;padding:18px}table{min-width:550px}}</style></head>
+<body><main><a href="./">← Volver a la aplicación</a><p>RETO 03 · ESFV</p><h1>Guía técnica del dimensionamiento</h1><p>Consulta aquí las siglas, las ecuaciones y los supuestos que usa la aplicación.</p>
+<h2>Qué significa cada dato</h2><div class="scroll"><table><thead><tr><th>Dato</th><th>Significado</th></tr></thead><tbody>
+<tr><td>kWh / kWh al día</td><td>Energía almacenada o consumida. Una carga de 1 kW durante una hora consume 1 kWh.</td></tr>
+<tr><td>kWp</td><td>Potencia nominal de los paneles en condiciones de referencia.</td></tr>
+<tr><td>MPPT</td><td>Seguimiento del punto de máxima potencia de los paneles. El voltaje debe estar dentro de la ventana del equipo.</td></tr>
+<tr><td>Voc / Vmp</td><td>Voltaje sin carga / voltaje de trabajo del panel.</td></tr>
+<tr><td>Isc / Imp</td><td>Corriente de cortocircuito / corriente de trabajo del panel.</td></tr>
+<tr><td>Ns / Np</td><td>Cantidad de unidades en serie / cadenas en paralelo.</td></tr>
+<tr><td>DoD</td><td>Porcentaje de la capacidad de la batería que se utiliza. El DoD de diseño limita la descarga permitida.</td></tr>
+<tr><td>HSP / PR</td><td>Horas sol pico / factor de rendimiento del generador.</td></tr>
+<tr><td>Tasa C</td><td>Corriente de carga o descarga dividida por la capacidad del banco en Ah.</td></tr>
+<tr><td>DC/AC</td><td>Potencia de paneles dividida por potencia del inversor. Rango inicial: 1,0 a 1,3.</td></tr>
+</tbody></table></div>
+<h2>Verificación de paneles y equipo</h2><pre>Voc_frío = Voc × [1 + |βVoc|/100 × (25 − Tmin)]
+Vmp_caliente = Vmp × [1 − |βVoc|/100 × (Tcelda − 25)]
+Vmp_frío = Vmp × [1 + |βVoc|/100 × (25 − Tmin)]
+Ns_máximo = piso(Vmáximo_equipo / Voc_frío_módulo)
+Corriente al banco = Ppico / Vnominal
+Corriente de diseño mostrada aparte = 1,25 × Isc</pre>
+<p>Se usa β de Voc también para Vmp, como en el método del Reto 02. El arranque se verifica conservadoramente con Vmp caliente. Las cadenas se reparten de forma uniforme y entera entre entradas MPPT; se verifica la entrada más cargada. El factor 1,25 no se aplica a la capacidad del regulador. El indicador original del Reto 02, 1,25 × 1,25 × Isc, conserva su identificación.</p>
+<h2>Banco de baterías</h2><pre>Ecc = Ed / ηinversor
+Capacidad requerida [Wh] = Ecc × días_respaldo / (DoD × fT)
+Capacidad requerida [Ah] = Capacidad requerida [Wh] / Vbanco
+Ns = Vbanco / Vunidad (entero)
+Np = techo(Capacidad requerida [Ah] / Ah_unidad)
+Einstalada = Ah_instalados × Vbanco
+DoD_diario = Ecc / Einstalada
+DoD_final = Ecc × días_respaldo / Einstalada
+DoD_efectivo = DoD_final / fT
+C_carga = (Ppico / Vnominal) / Ah_instalados
+C_descarga = [Pmax / (ηinversor × Vbanco)] / Ah_instalados</pre>
+<p>fT reduce la capacidad disponible con la temperatura. Se proponen los valores de la batería seleccionada; todos pueden revisarse en Ajustes avanzados. En el caso de prueba, LFP usa 51,2 V de banco y clase nominal de regulador de 48 V. La tasa C de carga se calcula antes de limitar el cargador.</p>
+<h2>Balance y recuperación</h2><pre>Egen = Ecc / ηbatería (sin baterías: Egen = Ecc)
+Prequerida = Egen / (HSP × PR)
+Eproducción = Ppico × HSP × PR
+Margen [%] = (Pinstalada / Prequerida − 1) × 100
+Recuperación [días] = días_respaldo × Ecc / (Eproducción × ηbatería − Ecc)</pre>
+<p>Se calculan el promedio anual y el mes con menos sol por separado. Si el excedente es cero o negativo, el banco no se recupera mientras se atiende el consumo. El método TdR aplica la eficiencia de batería a toda la energía diaria; no es una simulación horaria de despacho. PR y eficiencias se aplican una vez cada uno. Los días de operación se conservan como contexto; la autonomía representa días consecutivos.</p>
+<p>Al añadir paneles se completan cadenas originales, por lo que la cantidad añadida puede superar el mínimo energético. Se recalculan todos los equipos y se puede deshacer la ampliación. La comparación de tecnologías usa energía instalada / años de diseño: no representa energía entregada en su vida útil.</p>
+<h2>Interpretación de resultados</h2><ul><li><b>Compatible:</b> cumplen todos los criterios calculados y declarados del equipo.</li><li><b>No compatible:</b> al menos un criterio falla.</li><li><b>Requiere revisión:</b> no se detecta un incumplimiento con los datos disponibles, pero falta algún límite en la ficha.</li></ul>
+<p>Un resultado energético favorable no sustituye la revisión del equipo, la batería y sus datos pendientes. Un regulador CC requiere un inversor CA independiente. No se dimensionan aquí conductores, protecciones, puesta a tierra ni costos.</p>
+<h2>Referencias y datos pendientes</h2><p>Los catálogos separan productos comerciales con fichas verificables de referencias académicas TdR. CTRL-A/B/C, INV-A/B/C y las baterías AGM/LFP de ejemplo no se atribuyen a fabricantes reales. El TdR no declara Imp independiente de reguladores, C de descarga de baterías ni arranque de inversores. Se señalan los datos pendientes; los supuestos de ventana/arranque se conservan en las comprobaciones. La ficha Victron citada tampoco declara un límite Imp independiente.</p>
+<p>Fuentes: TdR Reto 03 ESFV 2026-II, secciones 4 a 6; Messenger y Abtahi (2017); Chaaban, AE 868; Dobos (2014). Las fichas de cada producto están enlazadas en su tarjeta.</p>
+</main></body></html>

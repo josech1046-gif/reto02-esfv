@@ -18,4 +18,5 @@ export default defineConfig([
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
   },
+  { files: ['tests/**/*.js', 'tests-ui/**/*.js', 'scripts/**/*.mjs'], languageOptions: { globals: globals.node } },
 ])

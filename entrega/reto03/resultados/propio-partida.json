@@ -1,0 +1,1653 @@
+{
+  "proyecto": {
+    "nombre": "Caso propuesto - aula rural - partida",
+    "fecha": "2026-10-25",
+    "integrantes": "Nicolas Paz",
+    "tipoApp": "Híbrido",
+    "diasMes": 30,
+    "cu": 1000
+  },
+  "resultados": {
+    "perfil": [
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      292,
+      292,
+      337,
+      337,
+      337,
+      337,
+      337,
+      337,
+      113,
+      113,
+      68,
+      68,
+      68,
+      68
+    ],
+    "pMax": 337,
+    "horaPico": 12,
+    "energiaDia": 3.424,
+    "pInst": 373,
+    "energiaMes": 102.72,
+    "costoMes": 102720
+  },
+  "h": {
+    "edWh": 3424,
+    "perfil": [
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      292,
+      292,
+      337,
+      337,
+      337,
+      337,
+      337,
+      337,
+      113,
+      113,
+      68,
+      68,
+      68,
+      68
+    ],
+    "pMax": 337,
+    "horaPico": 12,
+    "dentroWh": 2734,
+    "fueraWh": 690,
+    "tipoApp": "Híbrido",
+    "diasMes": 30,
+    "potenciaWp": 1100,
+    "ns": 2,
+    "np": 1,
+    "modulo": {
+      "id": "tdr550",
+      "fabricante": "Referencia TdR",
+      "modelo": "Caso Oficial 550W",
+      "potencia": 550,
+      "voc": 49.5,
+      "isc": 14,
+      "vmp": 41.5,
+      "imp": 13.3,
+      "beta": -0.27,
+      "alpha": 0.05,
+      "gamma": -0.35,
+      "noct": 45,
+      "celdas": 72,
+      "area": 2.58,
+      "eficiencia": 21.3,
+      "fuente": "Caso de prueba oficial TdR Reto 02",
+      "fechaConsulta": "2026-10-03"
+    },
+    "tMin": 20,
+    "tCelda": 63.2,
+    "hspAnual": 5.8,
+    "hspCritico": 5.2,
+    "pr": 0.7,
+    "requeridaReto02Wp": 843.3497536945813,
+    "excedenteReto02Pct": 30.432242990654213,
+    "areaGenerador": 5.16,
+    "areaDisponible": 20,
+    "corrienteDisenoReto02": 21.875,
+    "limitarPorArea": false,
+    "recursoNombre": "Alta Guajira - recurso supuesto para estudio",
+    "recursoFuente": "Supuesto de diseno: HSP anual 5.8 y critica 5.2 del escenario TdR; no es una medicion del aula.",
+    "errores": []
+  },
+  "config": {
+    "rama": "con",
+    "catalogo": "comercial",
+    "etaInv": 0.9,
+    "autonomia": 2,
+    "dod": 0.8,
+    "factorTemp": 1,
+    "vBanco": 51.2,
+    "vNominal": 48,
+    "etaBat": 0.92,
+    "bateriaId": "tdr-lfp",
+    "equipoCon": "goodwe-es5k",
+    "equipoSin": "inv-b",
+    "dcAcMin": 1,
+    "dcAcMax": 1.3,
+    "ajuste": null,
+    "ns": null
+  },
+  "resultado": {
+    "rama": "con",
+    "errores": [],
+    "arreglo": {
+      "ns": 2,
+      "np": 1,
+      "nTotal": 2,
+      "potenciaWp": 1100
+    },
+    "balance": {
+      "ecc": 3804.4444444444443,
+      "energiaGenerar": 4135.265700483092,
+      "anual": {
+        "produccion": 4466,
+        "util": 4108.72,
+        "requeridaWp": 1018.5383498726828,
+        "excedente": 304.2755555555559,
+        "margenPct": 7.997897196261672,
+        "modulosAdicionales": 0,
+        "recuperacion": 25.006572989395547
+      },
+      "critico": {
+        "produccion": 4003.9999999999995,
+        "util": 3683.68,
+        "requeridaWp": 1136.062005627223,
+        "excedente": -120.7644444444445,
+        "margenPct": -3.1742990654205605,
+        "modulosAdicionales": 1,
+        "recuperacion": null
+      }
+    },
+    "banco": {
+      "bateria": {
+        "id": "tdr-lfp",
+        "origen": "tdr",
+        "fabricante": "Referencia TdR (sin fabricante)",
+        "modelo": "LFP declarada 51,2 V / 100 Ah",
+        "tecnologia": "LFP",
+        "voltaje": 51.2,
+        "claseNominal": 48,
+        "ah": 100,
+        "dod": 0.8,
+        "eficiencia": 0.92,
+        "cCarga": 0.5,
+        "cDescarga": null,
+        "vida": 10,
+        "maxSerie": 1,
+        "fuente": "TdR Reto 03 ESFV 2026-II, seccion 6, pagina 3. Valores ilustrativos, no equipo comercial."
+      },
+      "ecc": 3804.4444444444443,
+      "capacidadWh": 9511.11111111111,
+      "capacidadAh": 185.76388888888886,
+      "ns": 1,
+      "np": 2,
+      "numero": 2,
+      "ah": 200,
+      "wh": 10240,
+      "dodDiario": 0.3715277777777778,
+      "dodFinal": 0.7430555555555556,
+      "dodEfectivo": 0.7430555555555556,
+      "iCarga": 22.916666666666668,
+      "iDescarga": 7.3133680555555545,
+      "cCarga": 0.11458333333333334,
+      "cDescarga": 0.03656684027777777,
+      "nominalPorAnio": 1024
+    },
+    "equipos": [
+      {
+        "equipo": {
+          "id": "victron15070",
+          "origen": "comercial",
+          "rama": "con",
+          "tipo": "regulador",
+          "fabricante": "Victron Energy",
+          "modelo": "SmartSolar MPPT 150/70-Tr VE.Can",
+          "vMax": 150,
+          "mpptMin": null,
+          "mpptMax": 145,
+          "startOffset": 5,
+          "impMax": null,
+          "iscMax": 50,
+          "outMax": 70,
+          "mppts": 1,
+          "clasesBanco": [
+            12,
+            24,
+            36,
+            48
+          ],
+          "fuente": "https://www.victronenergy.com/media/pg/Manual_SmartSolar_MPPT_150-70_up_to_250-100_VE.Can/es/technical-specifications.html",
+          "fechaConsulta": "2026-10-23",
+          "nota": "Version Tr. 150 V absoluto, 145 V en operacion. La tension de 48 V es clase nominal; admite perfil LFP con configuracion de carga apropiada. El rango de banco aqui expresa clases nominales."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 100.3365,
+            "limite": 150,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": "Limite derivado: Vbanco + 5 V (metodo TdR)."
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 84.1205,
+            "limite": 145,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Margen sobre banco (Vbat + 5 V)",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 14,
+            "limite": 50,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": null,
+            "cumple": null,
+            "unidad": "A",
+            "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+          },
+          {
+            "nombre": "Salida al banco (sin 1,25)",
+            "valor": 22.916666666666668,
+            "limite": 70,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Clase nominal de bateria",
+            "valor": 48,
+            "limite": "12/24/36/48",
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          }
+        ],
+        "fallos": [],
+        "pendientes": [
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": null,
+            "cumple": null,
+            "unidad": "A",
+            "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+          }
+        ],
+        "avisos": [
+          "Este equipo es un regulador CC: falta seleccionar el inversor CA independiente para las cargas.",
+          "Version Tr. 150 V absoluto, 145 V en operacion. La tension de 48 V es clase nominal; admite perfil LFP con configuracion de carga apropiada. El rango de banco aqui expresa clases nominales."
+        ],
+        "ratio": null,
+        "distribucion": [
+          1
+        ],
+        "nsMax": 2,
+        "voc": 100.3365,
+        "caliente": 74.43938,
+        "frio": 84.1205,
+        "imp": 13.3,
+        "isc": 14,
+        "salida": 22.916666666666668,
+        "estado": "Alerta",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "victron25070",
+          "origen": "comercial",
+          "rama": "con",
+          "tipo": "regulador",
+          "fabricante": "Victron Energy",
+          "modelo": "SmartSolar MPPT 250/70-Tr VE.Can",
+          "vMax": 250,
+          "mpptMin": null,
+          "mpptMax": 245,
+          "startOffset": 5,
+          "impMax": null,
+          "iscMax": 35,
+          "outMax": 70,
+          "mppts": 1,
+          "clasesBanco": [
+            12,
+            24,
+            36,
+            48
+          ],
+          "fuente": "https://www.victronenergy.com/media/pg/Manual_SmartSolar_MPPT_150-70_up_to_250-100_VE.Can/es/technical-specifications.html",
+          "fechaConsulta": "2026-10-23",
+          "nota": "Version Tr, clases de bateria 12/24/36/48 V; verificar perfil de carga/BMS para LFP 51,2 V. 250 V absoluto y 245 V operacion. Imp no declarado por separado."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 100.3365,
+            "limite": 250,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": "Limite derivado: Vbanco + 5 V (metodo TdR)."
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 84.1205,
+            "limite": 245,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Margen sobre banco (Vbat + 5 V)",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 14,
+            "limite": 35,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": null,
+            "cumple": null,
+            "unidad": "A",
+            "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+          },
+          {
+            "nombre": "Salida al banco (sin 1,25)",
+            "valor": 22.916666666666668,
+            "limite": 70,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Clase nominal de bateria",
+            "valor": 48,
+            "limite": "12/24/36/48",
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          }
+        ],
+        "fallos": [],
+        "pendientes": [
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": null,
+            "cumple": null,
+            "unidad": "A",
+            "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+          }
+        ],
+        "avisos": [
+          "Este equipo es un regulador CC: falta seleccionar el inversor CA independiente para las cargas.",
+          "Version Tr, clases de bateria 12/24/36/48 V; verificar perfil de carga/BMS para LFP 51,2 V. 250 V absoluto y 245 V operacion. Imp no declarado por separado."
+        ],
+        "ratio": null,
+        "distribucion": [
+          1
+        ],
+        "nsMax": 4,
+        "voc": 100.3365,
+        "caliente": 74.43938,
+        "frio": 84.1205,
+        "imp": 13.3,
+        "isc": 14,
+        "salida": 22.916666666666668,
+        "estado": "Alerta",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "victron250100",
+          "origen": "comercial",
+          "rama": "con",
+          "tipo": "regulador",
+          "fabricante": "Victron Energy",
+          "modelo": "SmartSolar MPPT 250/100-Tr VE.Can",
+          "vMax": 250,
+          "mpptMin": null,
+          "mpptMax": 245,
+          "startOffset": 5,
+          "impMax": null,
+          "iscMax": 70,
+          "outMax": 100,
+          "mppts": 1,
+          "clasesBanco": [
+            12,
+            24,
+            36,
+            48
+          ],
+          "fuente": "https://www.victronenergy.com/media/pg/Manual_SmartSolar_MPPT_150-70_up_to_250-100_VE.Can/es/technical-specifications.html",
+          "fechaConsulta": "2026-10-23",
+          "nota": "Version Tr, clases de bateria 12/24/36/48 V; verificar perfil de carga/BMS. Imp no declarado por separado."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 100.3365,
+            "limite": 250,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": "Limite derivado: Vbanco + 5 V (metodo TdR)."
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 84.1205,
+            "limite": 245,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Margen sobre banco (Vbat + 5 V)",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 14,
+            "limite": 70,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": null,
+            "cumple": null,
+            "unidad": "A",
+            "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+          },
+          {
+            "nombre": "Salida al banco (sin 1,25)",
+            "valor": 22.916666666666668,
+            "limite": 100,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Clase nominal de bateria",
+            "valor": 48,
+            "limite": "12/24/36/48",
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          }
+        ],
+        "fallos": [],
+        "pendientes": [
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": null,
+            "cumple": null,
+            "unidad": "A",
+            "nota": "La ficha no declara limite Imp independiente; requiere confirmacion."
+          }
+        ],
+        "avisos": [
+          "Este equipo es un regulador CC: falta seleccionar el inversor CA independiente para las cargas.",
+          "Version Tr, clases de bateria 12/24/36/48 V; verificar perfil de carga/BMS. Imp no declarado por separado."
+        ],
+        "ratio": null,
+        "distribucion": [
+          1
+        ],
+        "nsMax": 4,
+        "voc": 100.3365,
+        "caliente": 74.43938,
+        "frio": 84.1205,
+        "imp": 13.3,
+        "isc": 14,
+        "salida": 22.916666666666668,
+        "estado": "Alerta",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "deye5k",
+          "origen": "comercial",
+          "rama": "con",
+          "tipo": "hibrido",
+          "fabricante": "Deye",
+          "modelo": "SUN-5K-SG03LP1-EU (ficha 240722)",
+          "vMax": 500,
+          "mpptMin": 150,
+          "mpptMax": 425,
+          "startV": 125,
+          "impMax": 13,
+          "iscMax": 17,
+          "outMax": 120,
+          "mppts": 2,
+          "stringsMax": 1,
+          "pac": 5000,
+          "pvMax": 6500,
+          "batMin": 40,
+          "batMax": 60,
+          "fuente": "https://www.deyeinverter.com/deyeinverter/2024/07/23/datasheet_sun-3.6-6k-sg03lp1_240722_en.pdf",
+          "fechaConsulta": "2026-10-23",
+          "nota": "Version EU monofasica 220/230 V, 50/60 Hz. No sustituir por variantes LP1-US/LP1-EU de otra revision."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 100.3365,
+            "limite": 500,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 74.43938,
+            "limite": 150,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 84.1205,
+            "limite": 425,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 74.43938,
+            "limite": 125,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Margen sobre banco (Vbat + 5 V)",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 14,
+            "limite": 17,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": 13,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 1,
+            "limite": 1,
+            "cumple": true,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Salida al banco (sin 1,25)",
+            "valor": 22.916666666666668,
+            "limite": 120,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Tension banco minima",
+            "valor": 51.2,
+            "limite": 40,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Tension banco maxima",
+            "valor": 51.2,
+            "limite": 60,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Demanda maxima CA",
+            "valor": 337,
+            "limite": 5000,
+            "cumple": true,
+            "unidad": "W",
+            "nota": ""
+          },
+          {
+            "nombre": "Potencia FV maxima",
+            "valor": 1100,
+            "limite": 6500,
+            "cumple": true,
+            "unidad": "W",
+            "nota": ""
+          }
+        ],
+        "fallos": [
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 74.43938,
+            "limite": 150,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 74.43938,
+            "limite": 125,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": 13,
+            "cumple": false,
+            "unidad": "A",
+            "nota": ""
+          }
+        ],
+        "pendientes": [],
+        "avisos": [
+          "Version EU monofasica 220/230 V, 50/60 Hz. No sustituir por variantes LP1-US/LP1-EU de otra revision."
+        ],
+        "ratio": 0.22,
+        "distribucion": [
+          1,
+          0
+        ],
+        "nsMax": 9,
+        "voc": 100.3365,
+        "caliente": 74.43938,
+        "frio": 84.1205,
+        "imp": 13.3,
+        "isc": 14,
+        "salida": 22.916666666666668,
+        "estado": "No cumple",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "goodwe-es5k",
+          "origen": "comercial",
+          "rama": "con",
+          "tipo": "hibrido",
+          "fabricante": "GoodWe",
+          "modelo": "GW5000-ES-20 (LATAM ES V2.1, 20260609)",
+          "vMax": 600,
+          "mpptMin": 60,
+          "mpptMax": 550,
+          "startV": 58,
+          "impMax": 16,
+          "iscMax": 23,
+          "outMax": 120,
+          "mppts": 2,
+          "stringsMax": 1,
+          "pac": 5000,
+          "pvMax": 7500,
+          "batMin": 40,
+          "batMax": 60,
+          "tipoFuente": "ficha",
+          "revision": "20260609 LATAM-ES V2.1, pagina 2",
+          "fuente": "https://latam.goodwe.com/Ftp/Downloads/Datasheet/LATAM/GW_ES%20G2_Datasheet-LATAM_ES.pdf",
+          "fechaConsulta": "2026-10-24",
+          "nota": "Hibrido ES G2 de 48 V, litio o plomo-acido. Salida y respaldo 5000 W, 220/230/240 V F-N, 50/60 Hz. El respaldo no admite F-F ni cargas de 110-127 V. Sobre 490 V FV se limita progresivamente la carga/descarga; sobre 560 V entra en espera. La potencia de bateria depende del banco y BMS. No confundir con GW5000M-ES-20 de 60 A."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 100.3365,
+            "limite": 600,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 74.43938,
+            "limite": 60,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 84.1205,
+            "limite": 550,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 74.43938,
+            "limite": 58,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Margen sobre banco (Vbat + 5 V)",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 14,
+            "limite": 23,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": 16,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 1,
+            "limite": 1,
+            "cumple": true,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Salida al banco (sin 1,25)",
+            "valor": 22.916666666666668,
+            "limite": 120,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Tension banco minima",
+            "valor": 51.2,
+            "limite": 40,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Tension banco maxima",
+            "valor": 51.2,
+            "limite": 60,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Demanda maxima CA",
+            "valor": 337,
+            "limite": 5000,
+            "cumple": true,
+            "unidad": "W",
+            "nota": ""
+          },
+          {
+            "nombre": "Potencia FV maxima",
+            "valor": 1100,
+            "limite": 7500,
+            "cumple": true,
+            "unidad": "W",
+            "nota": ""
+          }
+        ],
+        "fallos": [],
+        "pendientes": [],
+        "avisos": [
+          "Hibrido ES G2 de 48 V, litio o plomo-acido. Salida y respaldo 5000 W, 220/230/240 V F-N, 50/60 Hz. El respaldo no admite F-F ni cargas de 110-127 V. Sobre 490 V FV se limita progresivamente la carga/descarga; sobre 560 V entra en espera. La potencia de bateria depende del banco y BMS. No confundir con GW5000M-ES-20 de 60 A."
+        ],
+        "ratio": 0.22,
+        "distribucion": [
+          1,
+          0
+        ],
+        "nsMax": 11,
+        "voc": 100.3365,
+        "caliente": 74.43938,
+        "frio": 84.1205,
+        "imp": 13.3,
+        "isc": 14,
+        "salida": 22.916666666666668,
+        "estado": "Cumple",
+        "cumple": true,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "growatt-sph3k",
+          "origen": "comercial",
+          "rama": "con",
+          "tipo": "hibrido",
+          "fabricante": "Growatt",
+          "modelo": "SPH 3000TL BL-UP (ficha 202604)",
+          "vMax": 550,
+          "mpptMin": 120,
+          "mpptMax": 550,
+          "startV": 120,
+          "impMax": 13.5,
+          "iscMax": 16.9,
+          "outMax": 66,
+          "mppts": 2,
+          "stringsMax": 1,
+          "pac": 3000,
+          "batMin": 42,
+          "batMax": 59,
+          "tipoFuente": "ficha",
+          "revision": "202604, pagina 2",
+          "fuente": "https://en.growatt.com/upload/file/SPH_3000-6000TL_BL-UP_Datasheet_202604.pdf",
+          "fechaConsulta": "2026-10-24",
+          "nota": "Hibrido monofasico, red y respaldo 3000 W a 230 V, 50/60 Hz. Banco de litio o plomo-acido 42-59 V; carga/descarga continua 3000 W y 66 A. La ficha recomienda hasta 6500 Wp de modulos STC; es una recomendacion de arreglo, no un limite absoluto codificado como pvMax. Revisar el estandar de red del pais."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 100.3365,
+            "limite": 550,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 74.43938,
+            "limite": 120,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 84.1205,
+            "limite": 550,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 74.43938,
+            "limite": 120,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Margen sobre banco (Vbat + 5 V)",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 14,
+            "limite": 16.9,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": 13.5,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 1,
+            "limite": 1,
+            "cumple": true,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Salida al banco (sin 1,25)",
+            "valor": 22.916666666666668,
+            "limite": 66,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Tension banco minima",
+            "valor": 51.2,
+            "limite": 42,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Tension banco maxima",
+            "valor": 51.2,
+            "limite": 59,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Demanda maxima CA",
+            "valor": 337,
+            "limite": 3000,
+            "cumple": true,
+            "unidad": "W",
+            "nota": ""
+          }
+        ],
+        "fallos": [
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 74.43938,
+            "limite": 120,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 74.43938,
+            "limite": 120,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          }
+        ],
+        "pendientes": [],
+        "avisos": [
+          "Hibrido monofasico, red y respaldo 3000 W a 230 V, 50/60 Hz. Banco de litio o plomo-acido 42-59 V; carga/descarga continua 3000 W y 66 A. La ficha recomienda hasta 6500 Wp de modulos STC; es una recomendacion de arreglo, no un limite absoluto codificado como pvMax. Revisar el estandar de red del pais."
+        ],
+        "ratio": 0.36666666666666664,
+        "distribucion": [
+          1,
+          0
+        ],
+        "nsMax": 10,
+        "voc": 100.3365,
+        "caliente": 74.43938,
+        "frio": 84.1205,
+        "imp": 13.3,
+        "isc": 14,
+        "salida": 22.916666666666668,
+        "estado": "No cumple",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "solis-hibrido5k",
+          "origen": "comercial",
+          "rama": "con",
+          "tipo": "hibrido",
+          "fabricante": "Solis (Ginlong)",
+          "modelo": "S6-EH1P5K-L-PLUS (Global V3.8)",
+          "vMax": 500,
+          "mpptMin": 90,
+          "mpptMax": 435,
+          "startV": 90,
+          "impMax": 16,
+          "iscMax": 20,
+          "outMax": 112,
+          "mppts": 2,
+          "stringsMax": 1,
+          "pac": 5000,
+          "batMin": 40,
+          "batMax": 60,
+          "tipoFuente": "ficha",
+          "revision": "Global V3.8, pagina 1, columna 5K",
+          "fuentePagina": "https://www.solisstorage.com/en/product/20260129161642.html",
+          "fuente": "https://storage-official-website.oss-eu-central-1.aliyuncs.com/solisstorage/products/S6-EH1P%283-10%29K-L-PLUS/S6-EH1P%283-10%29K-Global-Datasheet-V3.8_20260208165904.pdf",
+          "fechaConsulta": "2026-10-24",
+          "nota": "Hibrido de litio/plomo-acido 40-60 V. Salida y respaldo 5000 W a 220/230 V F-N, 50/60 Hz. Dos entradas, una cadena por MPPT. Arreglo recomendado maximo 10000 Wp y potencia FV utilizable maxima 8000 W; pueden existir recortes, no se equipara potencia utilizable con limite absoluto de modulos. La columna 5K declara 16 A por MPPT, no los 21 A de las variantes 9K/10K."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 100.3365,
+            "limite": 500,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 74.43938,
+            "limite": 90,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 84.1205,
+            "limite": 435,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 74.43938,
+            "limite": 90,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Margen sobre banco (Vbat + 5 V)",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 14,
+            "limite": 20,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": 16,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 1,
+            "limite": 1,
+            "cumple": true,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Salida al banco (sin 1,25)",
+            "valor": 22.916666666666668,
+            "limite": 112,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Tension banco minima",
+            "valor": 51.2,
+            "limite": 40,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Tension banco maxima",
+            "valor": 51.2,
+            "limite": 60,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Demanda maxima CA",
+            "valor": 337,
+            "limite": 5000,
+            "cumple": true,
+            "unidad": "W",
+            "nota": ""
+          }
+        ],
+        "fallos": [
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 74.43938,
+            "limite": 90,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 74.43938,
+            "limite": 90,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          }
+        ],
+        "pendientes": [],
+        "avisos": [
+          "Hibrido de litio/plomo-acido 40-60 V. Salida y respaldo 5000 W a 220/230 V F-N, 50/60 Hz. Dos entradas, una cadena por MPPT. Arreglo recomendado maximo 10000 Wp y potencia FV utilizable maxima 8000 W; pueden existir recortes, no se equipara potencia utilizable con limite absoluto de modulos. La columna 5K declara 16 A por MPPT, no los 21 A de las variantes 9K/10K."
+        ],
+        "ratio": 0.22,
+        "distribucion": [
+          1,
+          0
+        ],
+        "nsMax": 9,
+        "voc": 100.3365,
+        "caliente": 74.43938,
+        "frio": 84.1205,
+        "imp": 13.3,
+        "isc": 14,
+        "salida": 22.916666666666668,
+        "estado": "No cumple",
+        "cumple": false,
+        "alternativas": []
+      },
+      {
+        "equipo": {
+          "id": "deye-sg04-5k",
+          "origen": "comercial",
+          "rama": "con",
+          "tipo": "hibrido",
+          "fabricante": "Deye",
+          "modelo": "SUN-5K-SG04LP1-EU (ficha 20260911)",
+          "vMax": 500,
+          "mpptMin": 150,
+          "mpptMax": 425,
+          "startV": 125,
+          "impMax": 18,
+          "iscMax": 27,
+          "outMax": 120,
+          "mppts": 2,
+          "stringsMax": 1,
+          "pac": 5000,
+          "pvMax": 10000,
+          "batMin": 40,
+          "batMax": 60,
+          "tipoFuente": "ficha",
+          "revision": "20260911 en, publicada 2026-09-14, pagina 2",
+          "fuente": "https://www.deyeinverter.com/deyeinverter/2026/09/14/BDatasheetSUN-3-6K-SG04LP120260911en.pdf",
+          "fechaConsulta": "2026-10-24",
+          "nota": "Hibrido 220/230 V F-N, 50/60 Hz, banco litio/plomo-acido de 40-60 V. Potencia FV conectable 10000 Wp y potencia de entrada procesable 8000 W: el equipo puede limitar produccion. 18 A y 27 A por MPPT; no usar los limites de la revision SG03 ni los del modelo de 24 V."
+        },
+        "criterios": [
+          {
+            "nombre": "Voc frio",
+            "valor": 100.3365,
+            "limite": 500,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 74.43938,
+            "limite": 150,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Vmp frio / MPPT maximo",
+            "valor": 84.1205,
+            "limite": 425,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 74.43938,
+            "limite": 125,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Margen sobre banco (Vbat + 5 V)",
+            "valor": 74.43938,
+            "limite": 56.2,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Isc por MPPT",
+            "valor": 14,
+            "limite": 27,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Imp por MPPT",
+            "valor": 13.3,
+            "limite": 18,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Cadenas por MPPT",
+            "valor": 1,
+            "limite": 1,
+            "cumple": true,
+            "unidad": "",
+            "nota": ""
+          },
+          {
+            "nombre": "Salida al banco (sin 1,25)",
+            "valor": 22.916666666666668,
+            "limite": 120,
+            "cumple": true,
+            "unidad": "A",
+            "nota": ""
+          },
+          {
+            "nombre": "Tension banco minima",
+            "valor": 51.2,
+            "limite": 40,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Tension banco maxima",
+            "valor": 51.2,
+            "limite": 60,
+            "cumple": true,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Demanda maxima CA",
+            "valor": 337,
+            "limite": 5000,
+            "cumple": true,
+            "unidad": "W",
+            "nota": ""
+          },
+          {
+            "nombre": "Potencia FV maxima",
+            "valor": 1100,
+            "limite": 10000,
+            "cumple": true,
+            "unidad": "W",
+            "nota": ""
+          }
+        ],
+        "fallos": [
+          {
+            "nombre": "Vmp caliente / MPPT minimo",
+            "valor": 74.43938,
+            "limite": 150,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          },
+          {
+            "nombre": "Arranque (Vmp caliente conservador)",
+            "valor": 74.43938,
+            "limite": 125,
+            "cumple": false,
+            "unidad": "V",
+            "nota": ""
+          }
+        ],
+        "pendientes": [],
+        "avisos": [
+          "Hibrido 220/230 V F-N, 50/60 Hz, banco litio/plomo-acido de 40-60 V. Potencia FV conectable 10000 Wp y potencia de entrada procesable 8000 W: el equipo puede limitar produccion. 18 A y 27 A por MPPT; no usar los limites de la revision SG03 ni los del modelo de 24 V."
+        ],
+        "ratio": 0.22,
+        "distribucion": [
+          1,
+          0
+        ],
+        "nsMax": 9,
+        "voc": 100.3365,
+        "caliente": 74.43938,
+        "frio": 84.1205,
+        "imp": 13.3,
+        "isc": 14,
+        "salida": 22.916666666666668,
+        "estado": "No cumple",
+        "cumple": false,
+        "alternativas": []
+      }
+    ],
+    "seleccionado": {
+      "equipo": {
+        "id": "goodwe-es5k",
+        "origen": "comercial",
+        "rama": "con",
+        "tipo": "hibrido",
+        "fabricante": "GoodWe",
+        "modelo": "GW5000-ES-20 (LATAM ES V2.1, 20260609)",
+        "vMax": 600,
+        "mpptMin": 60,
+        "mpptMax": 550,
+        "startV": 58,
+        "impMax": 16,
+        "iscMax": 23,
+        "outMax": 120,
+        "mppts": 2,
+        "stringsMax": 1,
+        "pac": 5000,
+        "pvMax": 7500,
+        "batMin": 40,
+        "batMax": 60,
+        "tipoFuente": "ficha",
+        "revision": "20260609 LATAM-ES V2.1, pagina 2",
+        "fuente": "https://latam.goodwe.com/Ftp/Downloads/Datasheet/LATAM/GW_ES%20G2_Datasheet-LATAM_ES.pdf",
+        "fechaConsulta": "2026-10-24",
+        "nota": "Hibrido ES G2 de 48 V, litio o plomo-acido. Salida y respaldo 5000 W, 220/230/240 V F-N, 50/60 Hz. El respaldo no admite F-F ni cargas de 110-127 V. Sobre 490 V FV se limita progresivamente la carga/descarga; sobre 560 V entra en espera. La potencia de bateria depende del banco y BMS. No confundir con GW5000M-ES-20 de 60 A."
+      },
+      "criterios": [
+        {
+          "nombre": "Voc frio",
+          "valor": 100.3365,
+          "limite": 600,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Vmp caliente / MPPT minimo",
+          "valor": 74.43938,
+          "limite": 60,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Vmp frio / MPPT maximo",
+          "valor": 84.1205,
+          "limite": 550,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Arranque (Vmp caliente conservador)",
+          "valor": 74.43938,
+          "limite": 58,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Margen sobre banco (Vbat + 5 V)",
+          "valor": 74.43938,
+          "limite": 56.2,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Isc por MPPT",
+          "valor": 14,
+          "limite": 23,
+          "cumple": true,
+          "unidad": "A",
+          "nota": ""
+        },
+        {
+          "nombre": "Imp por MPPT",
+          "valor": 13.3,
+          "limite": 16,
+          "cumple": true,
+          "unidad": "A",
+          "nota": ""
+        },
+        {
+          "nombre": "Cadenas por MPPT",
+          "valor": 1,
+          "limite": 1,
+          "cumple": true,
+          "unidad": "",
+          "nota": ""
+        },
+        {
+          "nombre": "Salida al banco (sin 1,25)",
+          "valor": 22.916666666666668,
+          "limite": 120,
+          "cumple": true,
+          "unidad": "A",
+          "nota": ""
+        },
+        {
+          "nombre": "Tension banco minima",
+          "valor": 51.2,
+          "limite": 40,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Tension banco maxima",
+          "valor": 51.2,
+          "limite": 60,
+          "cumple": true,
+          "unidad": "V",
+          "nota": ""
+        },
+        {
+          "nombre": "Demanda maxima CA",
+          "valor": 337,
+          "limite": 5000,
+          "cumple": true,
+          "unidad": "W",
+          "nota": ""
+        },
+        {
+          "nombre": "Potencia FV maxima",
+          "valor": 1100,
+          "limite": 7500,
+          "cumple": true,
+          "unidad": "W",
+          "nota": ""
+        }
+      ],
+      "fallos": [],
+      "pendientes": [],
+      "avisos": [
+        "Hibrido ES G2 de 48 V, litio o plomo-acido. Salida y respaldo 5000 W, 220/230/240 V F-N, 50/60 Hz. El respaldo no admite F-F ni cargas de 110-127 V. Sobre 490 V FV se limita progresivamente la carga/descarga; sobre 560 V entra en espera. La potencia de bateria depende del banco y BMS. No confundir con GW5000M-ES-20 de 60 A."
+      ],
+      "ratio": 0.22,
+      "distribucion": [
+        1,
+        0
+      ],
+      "nsMax": 11,
+      "voc": 100.3365,
+      "caliente": 74.43938,
+      "frio": 84.1205,
+      "imp": 13.3,
+      "isc": 14,
+      "salida": 22.916666666666668,
+      "estado": "Cumple",
+      "cumple": true,
+      "alternativas": []
+    },
+    "avisos": [
+      "Tasa C de descarga pendiente: el catalogo no declara limite continuo.",
+      "El banco no se recupera con este generador en el mes critico."
+    ],
+    "tecnologias": [
+      {
+        "bateria": {
+          "id": "tdr-agm",
+          "origen": "tdr",
+          "fabricante": "Referencia TdR (sin fabricante)",
+          "modelo": "AGM declarada 12 V / 200 Ah",
+          "tecnologia": "AGM",
+          "voltaje": 12,
+          "claseNominal": 12,
+          "ah": 200,
+          "dod": 0.5,
+          "eficiencia": 0.8,
+          "cCarga": 0.2,
+          "cDescarga": null,
+          "vida": 4,
+          "fuente": "TdR Reto 03 ESFV 2026-II, seccion 6, pagina 3. Valores ilustrativos, no equipo comercial."
+        },
+        "ecc": 3804.4444444444443,
+        "capacidadWh": 15217.777777777777,
+        "capacidadAh": 317.037037037037,
+        "ns": 4,
+        "np": 2,
+        "numero": 8,
+        "ah": 400,
+        "wh": 19200,
+        "dodDiario": 0.19814814814814816,
+        "dodFinal": 0.3962962962962963,
+        "dodEfectivo": 0.3962962962962963,
+        "iCarga": 22.916666666666668,
+        "iDescarga": 7.800925925925926,
+        "cCarga": 0.05729166666666667,
+        "cDescarga": 0.019502314814814813,
+        "nominalPorAnio": 4800
+      },
+      {
+        "bateria": {
+          "id": "tdr-lfp",
+          "origen": "tdr",
+          "fabricante": "Referencia TdR (sin fabricante)",
+          "modelo": "LFP declarada 51,2 V / 100 Ah",
+          "tecnologia": "LFP",
+          "voltaje": 51.2,
+          "claseNominal": 48,
+          "ah": 100,
+          "dod": 0.8,
+          "eficiencia": 0.92,
+          "cCarga": 0.5,
+          "cDescarga": null,
+          "vida": 10,
+          "maxSerie": 1,
+          "fuente": "TdR Reto 03 ESFV 2026-II, seccion 6, pagina 3. Valores ilustrativos, no equipo comercial."
+        },
+        "ecc": 3804.4444444444443,
+        "capacidadWh": 9511.11111111111,
+        "capacidadAh": 185.76388888888886,
+        "ns": 1,
+        "np": 2,
+        "numero": 2,
+        "ah": 200,
+        "wh": 10240,
+        "dodDiario": 0.3715277777777778,
+        "dodFinal": 0.7430555555555556,
+        "dodEfectivo": 0.7430555555555556,
+        "iCarga": 22.916666666666668,
+        "iDescarga": 7.3133680555555545,
+        "cCarga": 0.11458333333333334,
+        "cDescarga": 0.03656684027777777,
+        "nominalPorAnio": 1024
+      }
+    ],
+    "modulosAgregados": 0,
+    "conductor": {
+      "isc": 14,
+      "diseno": 17.5
+    }
+  }
+}

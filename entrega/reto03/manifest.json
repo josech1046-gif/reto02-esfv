@@ -1,0 +1,111 @@
+{
+  "version": "3.3.0",
+  "fecha": "2026-10-25",
+  "guia": {
+    "nombre": "TdR_Reto03_ESFV_2026II.pdf",
+    "paginas": 3,
+    "sha256": "5c1a63377edc2c8cda7b22197dea43f75903efbb808473a6ab61529231f5d5e4"
+  },
+  "generacion": "pnpm entrega:generar",
+  "verificacion": "pnpm entrega:verificar",
+  "fuentes": {
+    "package.json": "f9a950a0a43cb68f1215f11b0459c82aec2372ad7861ce614ce56f6795b76c4b",
+    "scripts/datos-entrega.mjs": "8ab1bcbab14833c4709f241d1e8b62ea357927c722f9c2b7cc972c28e4a220e6",
+    "scripts/generar-entrega.mjs": "9476363de7c892d311c366517bf3a3ebc41e9e6ddb57ccaf0c6d5e2a9485684e",
+    "src/App.jsx": "b5dc8ca933fd3f5a44ca513531fcd988156b34d1b621b7a6b146cb12411ad977",
+    "src/reto02/generador.js": "3facad073a260c4cae3d3abee1cc53501b702c960e1ec3847dbc9ba783517bba",
+    "src/reto02/recurso.js": "8b086cb82139c6d6c719ee73397176391b78b2457fa1b011e1803796fe15239e",
+    "src/reto03/calculos.js": "d9b89ebb62323a2090a38fca66b13d5a0c3fe4e53996b7c9a9666633571fcd61",
+    "src/reto03/informe.js": "bfb2f27f7614f90a7bfdf0df99a533405bc27cc672177e309cb1ccafd90701bb",
+    "src/reto03/proyecto.js": "3d702e69add15f3469939926d5abf5d7d81b5cf60a40197da43b4412b29c082f",
+    "public/ejemplo_reto03.json": "d93e2a867fbe462c909f6240f2f3d0b4d100da9985b4aa12b05eab768404d3a8",
+    "public/caso_papeleria.json": "e041e244841c5b9466b38f3a94b7914e5c48d4797b95f3a2daf896fe5bd4667a",
+    "public/catalogo_modulos.json": "0b949830f5d1a803be389ae551041612c55df48ded27518c1676c5824d77a96d",
+    "public/catalogo_conversion.json": "dc6ba69d67f949a31bf0298e4d7159e12d2ccc736a855345b4407f1887004581",
+    "public/catalogo_conversion_tdr.json": "efb674d5d4a0f51484c9256079f8da2388a355fe5550dda7ae680374a5f8a7b7",
+    "public/catalogo_baterias.json": "8e9afca7bf80f785d93798de492c00f443ceebc34dd68e76d193a8f8d7cd649b",
+    "entrega/reto03/entrada/papeleria-original.json": "e94fe92a96336b2bd24140ca0cc6fd13f8a40fe739630fa7117c8f0780c9b3d4"
+  },
+  "archivos": {
+    "casos/papeleria-final.json": {
+      "sha256": "e041e244841c5b9466b38f3a94b7914e5c48d4797b95f3a2daf896fe5bd4667a",
+      "bytes": 32119
+    },
+    "resultados/papeleria-final.json": {
+      "sha256": "35529d7e670c94b64138570773206283bed81b7776c886dfa7d29ae8c0e9335f",
+      "bytes": 36053
+    },
+    "informes/papeleria-final.pdf": {
+      "sha256": "5c079cd9c01331e62f1ec45dc5ca2bb6acc6805e42124e1ee424518e49f66b0e",
+      "bytes": 16269
+    },
+    "casos/tdr-agm.json": {
+      "sha256": "81f49aa4332a6072c5675cd77b0993eb234f4097aab080dddb7e08dc2a0e5d15",
+      "bytes": 21643
+    },
+    "resultados/tdr-agm.json": {
+      "sha256": "fb4fb210b8a7e13cfeaf582d7ad73ecfea86c8de1b98ce5d4178b5d131b5c217",
+      "bytes": 20433
+    },
+    "informes/tdr-agm.pdf": {
+      "sha256": "de52956448612057a7ee7682867e14fd7f785aa52531c7651dc32226f3c31d73",
+      "bytes": 17579
+    },
+    "casos/tdr-lfp.json": {
+      "sha256": "e0b87514383e26edcf4874c83e5cf786b643d1f6f6e840d4fddbed1274868851",
+      "bytes": 21646
+    },
+    "resultados/tdr-lfp.json": {
+      "sha256": "24ff55a41b052ba18bdd70fed044b8d1b31faa1a2d544acab4265ef7e52b8417",
+      "bytes": 20486
+    },
+    "informes/tdr-lfp.pdf": {
+      "sha256": "d4d768a01a78adf2622164e8110cc393d7b49de35db9ac1cb90d770363c52e16",
+      "bytes": 17590
+    },
+    "casos/tdr-sin-almacenamiento.json": {
+      "sha256": "6634367282773fc95f8c313352b3123c0a92c66ae4a576260f64a74b839e38be",
+      "bytes": 21656
+    },
+    "resultados/tdr-sin-almacenamiento.json": {
+      "sha256": "1a1516215b309b9eec043d2b45f7ff305045f0121e2454c65a216574b7532aa9",
+      "bytes": 14297
+    },
+    "informes/tdr-sin-almacenamiento.pdf": {
+      "sha256": "97384c564d635fa8d044f80e59e1f9a475f02d2ac20af143735e164a9b1915b8",
+      "bytes": 15264
+    },
+    "casos/propio-partida.json": {
+      "sha256": "f1085fc0d40df547ea79280cdb61707c35c68ad8ac42724ba504cd35a05df10b",
+      "bytes": 22721
+    },
+    "resultados/propio-partida.json": {
+      "sha256": "47a45229225412b10d1c1d22eedba49b197aaf21b51568f0625f3ce50b8bf3cd",
+      "bytes": 47115
+    },
+    "informes/propio-partida.pdf": {
+      "sha256": "fe1e0186e3768cde0cb59fa10cc82ff33ee55eaf00c2b99fb4df93819cb827ec",
+      "bytes": 17876
+    },
+    "casos/propio-cierre.json": {
+      "sha256": "d614ba85ee9514fdab6925b6db5aa28a0379f01d75c47778bf7a59ce09f88839",
+      "bytes": 22722
+    },
+    "resultados/propio-cierre.json": {
+      "sha256": "d8bf3117e1b7b4dfad95cfce59e34ae4f07d8a3003a9965c96641bd2a7a2bb96",
+      "bytes": 46249
+    },
+    "informes/propio-cierre.pdf": {
+      "sha256": "c19d0e4f6f995b381aca1bf0caf775b4b064b74af5848a5c3d1e3be6d2568087",
+      "bytes": 17809
+    },
+    "resultados/sensibilidad.json": {
+      "sha256": "18f9e12aa370c80bd5d3b8422fe936d6181d2f17d2de77d7cb8d97c26d07d271",
+      "bytes": 5335
+    },
+    "resultados/sensibilidad.csv": {
+      "sha256": "34241978b1a3876d6d24eb2acd286c978d81d5a18575307c22dc3802a67e0824",
+      "bytes": 1929
+    }
+  }
+}
